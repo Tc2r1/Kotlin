@@ -3,13 +3,16 @@ package net.tc2r1.ui.auth
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import net.tc2r1.data.network.Resource
 import net.tc2r1.data.repository.AuthRepository
 import net.tc2r1.data.responses.LoginResponse
 import net.tc2r1.ui.base.BaseViewModel
+import javax.inject.Inject
 
-class AuthViewModel(
+@HiltViewModel
+class AuthViewModel @Inject constructor(
     private val repository: AuthRepository
 ) : BaseViewModel(repository) {
 

@@ -30,7 +30,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         binding.progressbar.visible(false)
         viewModel.getUser()
-        viewModel.user.observe(viewLifecycleOwner){
+        viewModel.user.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Success -> {
                     binding.progressbar.visible(false)

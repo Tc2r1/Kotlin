@@ -1,14 +1,15 @@
 package net.tc2r1.data.network
 
 import android.content.Context
-import net.tc2r1.BuildConfig
+import androidx.viewbinding.BuildConfig
 import okhttp3.Authenticator
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 
-class RemoteDataSource {
+class RemoteDataSource @Inject constructor() {
 
     companion object {
         private const val BASE_URL = "http://apix.simplifiedcoding.in/api/"

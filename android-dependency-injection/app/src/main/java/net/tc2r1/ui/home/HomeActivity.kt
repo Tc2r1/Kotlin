@@ -1,7 +1,7 @@
 package net.tc2r1.ui.home
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import net.tc2r1.R
@@ -23,7 +23,7 @@ class HomeActivity : AppCompatActivity() {
 
         userPreferences = UserPreferences(this)
         val remoteDataSource = RemoteDataSource()
-        val api = remoteDataSource.buildApi(UserApi::class.java,this)
+        val api = remoteDataSource.buildApi(UserApi::class.java, this)
         val authRepository = UserRepository(api)
         viewModel = HomeViewModel(authRepository)
     }

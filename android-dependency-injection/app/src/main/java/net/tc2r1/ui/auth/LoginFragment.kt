@@ -4,9 +4,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import net.tc2r1.R
+import net.tc2r1.data.network.RemoteDataSource
 import net.tc2r1.data.network.Resource
 import net.tc2r1.databinding.FragmentLoginBinding
 import net.tc2r1.ui.enable
@@ -14,11 +17,15 @@ import net.tc2r1.ui.handleApiError
 import net.tc2r1.ui.home.HomeActivity
 import net.tc2r1.ui.startNewActivity
 import net.tc2r1.ui.visible
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private lateinit var binding: FragmentLoginBinding
-    private var viewModel: AuthViewModel? = null
+    @Inject
+    lateinit var remoteDataSource: RemoteDataSource
+    private val viewModel: AuthViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -27,12 +34,12 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         binding.progressbar.visible(false)
         binding.buttonLogin.enable(false)
 
-        viewModel?.loginResponse?.observe(viewLifecycleOwner) {
+        viewModel.loginResponse.observe(viewLifecycleOwner) {
             binding.progressbar.visible(it is Resource.Loading)
             when (it) {
                 is Resource.Success -> {
                     lifecycleScope.launch {
-                        viewModel?.saveAccessTokens(
+                        viewModel.saveAccessTokens(
                             it.value.user.access_token!!,
                             it.value.user.refresh_token!!
                         )
@@ -56,6 +63,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     private fun login() {
         val email = binding.editTextTextEmailAddress.text.toString().trim()
         val password = binding.editTextTextPassword.text.toString().trim()
-        viewModel?.login(email, password)
+        viewModel.login(email, password)
     }
 }
