@@ -12,10 +12,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var wheels = Wheels()
-        var engine = Engine()
-        car = Car(wheels, engine)
-
+        car = DaggerCarComponent.create().getCar()
         car.start()
+
     }
 }

@@ -1,4 +1,7 @@
 package com.tc2r1.daggerdemocars
 
-class Wheels {
+import javax.inject.Inject
+
+class Wheels @Inject constructor() {
+
 }

@@ -1,4 +1,6 @@
 package com.tc2r1.daggerdemocars
 
-class Engine {
+import javax.inject.Inject
+
+class Engine @Inject constructor() {
 }
