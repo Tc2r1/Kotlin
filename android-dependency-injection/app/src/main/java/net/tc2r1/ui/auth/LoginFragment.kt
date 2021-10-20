@@ -24,8 +24,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentLoginBinding.bind(view)
 
-        viewModel = (requireActivity() as AuthActivity).appContainer.authContainer?.authViewModelFactory?.create()
-
         binding.progressbar.visible(false)
         binding.buttonLogin.enable(false)
 
