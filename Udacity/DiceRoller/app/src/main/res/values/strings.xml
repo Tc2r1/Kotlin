@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Dice Roller</string>
+    <string name="roll_dice_btn_text">Roll Dice</string>
+    <string name="content_description_dice_image">An Image of dice that displays current number.</string>
 </resources>
