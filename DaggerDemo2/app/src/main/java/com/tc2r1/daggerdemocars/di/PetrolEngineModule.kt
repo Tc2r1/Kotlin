@@ -7,12 +7,10 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class PetrolEngineModule(val powerCapacity : Int) {
+abstract class PetrolEngineModule {
 
 
-    @Provides
-    fun providesPetrolEngine() : Engine {
+    @Binds
+    abstract fun providesPetrolEngine(petrolEngine: PetrolEngine) : Engine
 
-        return PetrolEngine(powerCapacity)
-    }
 }
