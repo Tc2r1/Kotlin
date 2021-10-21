@@ -1,16 +1,14 @@
 package com.tc2r1.daggerdemocars.di
 
-import com.tc2r1.daggerdemocars.objects.Engine
-import com.tc2r1.daggerdemocars.objects.PetrolEngine
+import com.tc2r1.daggerdemocars.objects.hood.Engine
+import com.tc2r1.daggerdemocars.objects.hood.PetrolEngine
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 
 @Module
-class PetrolEngineModule {
+abstract class PetrolEngineModule {
 
-    @Provides
-    fun providesPetrolEngine(petrolEngine: PetrolEngine) : Engine {
-        return petrolEngine
 
-    }
+    @Binds
+    abstract fun providesPetrolEngine(petrolEngine: PetrolEngine) : Engine
 }

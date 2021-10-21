@@ -1,6 +1,8 @@
 package com.tc2r1.daggerdemocars.objects
 
 import android.util.Log
+import com.tc2r1.daggerdemocars.objects.hood.Engine
+import com.tc2r1.daggerdemocars.objects.mobility.Wheels
 import javax.inject.Inject
 
 class Car {

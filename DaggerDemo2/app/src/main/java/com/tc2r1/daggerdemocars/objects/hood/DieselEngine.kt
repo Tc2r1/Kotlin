@@ -1,4 +1,4 @@
-package com.tc2r1.daggerdemocars.objects
+package com.tc2r1.daggerdemocars.objects.hood
 
 import android.util.Log
 import javax.inject.Inject

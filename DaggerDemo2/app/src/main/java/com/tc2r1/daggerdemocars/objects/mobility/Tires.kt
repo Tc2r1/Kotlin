@@ -1,4 +1,4 @@
-package com.tc2r1.daggerdemocars.objects
+package com.tc2r1.daggerdemocars.objects.mobility
 
 class Tires {
 }
