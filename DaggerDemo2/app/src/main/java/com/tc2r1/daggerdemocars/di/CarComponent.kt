@@ -5,7 +5,9 @@ import com.tc2r1.daggerdemocars.objects.Car
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Named
+import javax.inject.Singleton
 
+@Singleton
 @Component(modules = [PetrolEngineModule::class, WheelsModule::class])
 interface CarComponent {
 
@@ -21,6 +23,9 @@ interface CarComponent {
 
         @BindsInstance
         fun provideEngineCapacity(@Named("engine") engineCapacity: Int): MyBuilder
+
+        @BindsInstance
+        fun providePassengerName(name: String): MyBuilder
 
         fun build(): CarComponent
     }
