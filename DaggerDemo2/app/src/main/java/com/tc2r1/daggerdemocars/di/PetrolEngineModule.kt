@@ -4,11 +4,15 @@ import com.tc2r1.daggerdemocars.objects.hood.Engine
 import com.tc2r1.daggerdemocars.objects.hood.PetrolEngine
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
 
 @Module
-abstract class PetrolEngineModule {
+class PetrolEngineModule(val powerCapacity : Int) {
 
 
-    @Binds
-    abstract fun providesPetrolEngine(petrolEngine: PetrolEngine) : Engine
+    @Provides
+    fun providesPetrolEngine() : Engine {
+
+        return PetrolEngine(powerCapacity)
+    }
 }
