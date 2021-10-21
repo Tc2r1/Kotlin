@@ -1,4 +1,4 @@
-package com.tc2r1.daggerdemocars
+package com.tc2r1.daggerdemocars.objects
 
 import javax.inject.Inject
 

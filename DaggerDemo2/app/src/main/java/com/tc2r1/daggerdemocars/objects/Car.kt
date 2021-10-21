@@ -1,5 +1,6 @@
-package com.tc2r1.daggerdemocars
+package com.tc2r1.daggerdemocars.objects
 
+import android.util.Log
 import javax.inject.Inject
 
 class Car {
@@ -13,8 +14,9 @@ class Car {
     }
 
     fun start(){
+        engine.start()
         println("driving...")
-
+        Log.wtf("Tc2r1", "start: DRIVING...", )
 
     }
 }
