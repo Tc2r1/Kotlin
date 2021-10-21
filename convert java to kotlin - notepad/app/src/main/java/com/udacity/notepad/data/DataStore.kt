@@ -21,8 +21,9 @@ object DataStore {
     fun execute(runnable: Runnable) {
         execute { runnable.run() }
     }
+
     @JvmStatic
-    fun execute( fn: () -> Unit) {
+    fun execute(fn: () -> Unit) {
         doAsync { fn() }
     }
 

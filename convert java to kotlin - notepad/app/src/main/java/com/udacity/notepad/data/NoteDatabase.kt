@@ -12,7 +12,7 @@ import com.udacity.notepad.data.NotesContract.NoteTable._TABLE_NAME
 import org.jetbrains.anko.db.transaction
 import java.util.*
 
-class NoteDatabase(context: Context?) {
+class NoteDatabase(context: Context) {
     private val helper: NotesOpenHelper = NotesOpenHelper(context)
 
     fun getAll(): List<Note> {
@@ -60,14 +60,16 @@ class NoteDatabase(context: Context?) {
         helper.writableDatabase.update(
             _TABLE_NAME,
             values,
-            _ID + " = ?", arrayOf(Integer.toString(note.id))
+            _ID + " = ?",
+            arrayOf(Integer.toString(note.id))
         )
     }
 
     fun delete(note: Note) {
         helper.writableDatabase.delete(
             _TABLE_NAME,
-            _ID + " = ?", arrayOf(Integer.toString(note.id))
+            _ID + " = ?",
+            arrayOf(Integer.toString(note.id))
         )
     }
 
