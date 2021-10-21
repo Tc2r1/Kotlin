@@ -4,13 +4,12 @@ import com.tc2r1.daggerdemocars.objects.hood.Engine
 import com.tc2r1.daggerdemocars.objects.hood.PetrolEngine
 import dagger.Binds
 import dagger.Module
-import dagger.Provides
 
 @Module
 abstract class PetrolEngineModule {
 
 
     @Binds
-    abstract fun providesPetrolEngine(petrolEngine: PetrolEngine) : Engine
+    abstract fun providesPetrolEngine(petrolEngine: PetrolEngine): Engine
 
 }

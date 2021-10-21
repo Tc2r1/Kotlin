@@ -14,14 +14,14 @@ interface CarComponent {
     fun inject(mainActivity: MainActivity)
 
     @Component.Builder
-    interface MyBuilder{
+    interface MyBuilder {
 
         @BindsInstance
-        fun providePowerCapacity(@Named("power")powerCapacity : Int) : MyBuilder
+        fun providePowerCapacity(@Named("power") powerCapacity: Int): MyBuilder
 
         @BindsInstance
-        fun provideEngineCapacity(@Named("engine")engineCapacity : Int) : MyBuilder
+        fun provideEngineCapacity(@Named("engine") engineCapacity: Int): MyBuilder
 
-        fun build() : CarComponent
+        fun build(): CarComponent
     }
 }

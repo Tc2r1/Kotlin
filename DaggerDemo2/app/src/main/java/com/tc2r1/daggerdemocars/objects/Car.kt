@@ -5,26 +5,20 @@ import com.tc2r1.daggerdemocars.objects.hood.Engine
 import com.tc2r1.daggerdemocars.objects.mobility.Wheels
 import javax.inject.Inject
 
-class Car {
-    lateinit var wheels: Wheels
+class Car @Inject constructor(var wheels: Wheels, driver: Driver) {
 
     @Inject
     lateinit var engine: Engine
 
     @Inject
-    constructor(wheels: Wheels) {
-        this.wheels = wheels
-    }
-
-    @Inject
-    fun provideCarToRemote(remote: Remote){
+    fun provideCarToRemote(remote: Remote) {
         remote.provideCar(this)
     }
 
-    fun start(){
+    fun start() {
         engine.start()
         println("driving...")
-        Log.wtf("Tc2r1", "start: DRIVING...", )
+        Log.wtf("Tc2r1", "start: DRIVING...")
 
     }
 
