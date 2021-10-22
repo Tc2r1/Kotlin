@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingStart="@dimen/padding"
+    android:paddingLeft="@dimen/padding"
+    android:paddingEnd="@dimen/padding"
+    android:paddingRight="@dimen/padding"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/tv_name"
+        style="@style/NameStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/name"
+        android:textAlignment="center" />
+
+    <ImageView
+        android:id="@+id/img_star"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/layout_margin"
+        android:contentDescription="@string/yellow_star"
+        app:srcCompat="@android:drawable/btn_star_big_on"
+        tools:ignore="ImageContrastCheck" />
+
+    <ScrollView
+        android:id="@+id/sroll_bio"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_bio"
+            style="@style/NameStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lineSpacingMultiplier="1.2"
+            android:text="@string/bio" />
+    </ScrollView>
+
+
+</LinearLayout>
