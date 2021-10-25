@@ -1,14 +1,18 @@
 package com.nudennie.guesstheword.screens.game
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import timber.log.Timber
 
 class GameViewModel : ViewModel() {
-    // The current word
-    var word = ""
+    // The current word and current score
+    private var _word = MutableLiveData<String>()
+    private var _score = MutableLiveData<Int>()
 
-    // The current score
-    var score = 0
+    // Encapsulation using Backing Properties.
+    val word : LiveData<String> get() = _word
+    val score : LiveData<Int> get() = _score
 
     // The list of words - the front of the list is the next word to guess
     private lateinit var wordList: MutableList<String>
@@ -17,6 +21,7 @@ class GameViewModel : ViewModel() {
         Timber.i("GameViewModel created!")
         resetList()
         nextWord()
+        _score.value = 0
 
     }
 
@@ -61,19 +66,19 @@ class GameViewModel : ViewModel() {
     private fun nextWord() {
         //Select and remove a word from the list
         if (wordList.isEmpty()) {
-          //  gameFinished()
+//            gameFinished()
         } else {
-            word = wordList.removeAt(0)
+            _word.value = wordList.removeAt(0)
         }
     }
 
     fun onSkip() {
-        score--
+        _score.value = (score.value)?.minus(1)
         nextWord()
     }
 
     fun onCorrect() {
-        score++
+        _score.value = (score.value)?.plus(1)
         nextWord()
     }
 

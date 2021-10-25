@@ -14,13 +14,16 @@ If you get the word right, press **Got It**. If you're stuck, press **Skip**. Th
 
 ## Nudennie's Notes on Project: 
 
-Software design principle this app will exemplify is 
+#Software design principle this app will exemplify is 
 
 **Separation of Concerns** Divide your code into classes, each with separate, well-defined responsibilities
 Code is more Organized and Easier to debug. Code is much more Modular
 
 **Drive UI from a model** Models are components that are responsible for handling the data for an app. Independent from the UI Controller (View objects)
 and app components in the app. They are unaffected by the app's lifecycle. 
+
+**Encapsulation** The Notion of restricting direct access to an object's fields. 
+
 
 
 **UI Controller** (Fragments/Activities) Displays data and captures OS and user events (user touches).
