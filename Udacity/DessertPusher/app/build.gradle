@@ -22,7 +22,7 @@ apply plugin: "kotlin-kapt"
 android {
     compileSdkVersion 30
     defaultConfig {
-        applicationId "com.example.android.dessertpusher"
+        applicationId "com.nudennie.dessertpusher"
         minSdkVersion 19
         targetSdkVersion 30
         versionCode 1

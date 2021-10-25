@@ -8,7 +8,7 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "com.tc2r1.diceroller"
+        applicationId "com.nudennie.diceroller"
         minSdk 19
         targetSdk 31
         versionCode 1
