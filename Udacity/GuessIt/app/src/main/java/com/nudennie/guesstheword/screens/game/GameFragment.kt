@@ -17,6 +17,7 @@
 package com.nudennie.guesstheword.screens.game
 
 import android.os.Bundle
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -70,6 +71,17 @@ class GameFragment : Fragment() {
         viewModel.word.observe(viewLifecycleOwner, Observer { word ->
             binding.wordText.text = word
         })
+
+        viewModel.eventGameFinished.observe(viewLifecycleOwner, Observer { isGameFinished ->
+            if (isGameFinished) {
+                gameFinished()
+                viewModel.onGameFinishedComplete()
+            }
+        })
+
+        viewModel.currentTime.observe(viewLifecycleOwner, Observer { currentTime ->
+            binding.timerText.text = DateUtils.formatElapsedTime(currentTime).toString()
+        })
         return binding.root
     }
 
@@ -79,5 +91,6 @@ class GameFragment : Fragment() {
     private fun gameFinished() {
         val action = GameFragmentDirections.actionGameToScore(viewModel.score.value ?: 0)
         findNavController(this).navigate(action)
+
     }
 }
