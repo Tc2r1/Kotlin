@@ -28,7 +28,7 @@ android {
         dataBinding true
     }
     defaultConfig {
-        applicationId 'com.example.android.navigation'
+        applicationId 'com.nudennie.navigation'
         minSdkVersion 19
         targetSdkVersion 30
         vectorDrawables.useSupportLibrary = true
