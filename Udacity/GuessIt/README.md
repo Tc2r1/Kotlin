@@ -13,3 +13,19 @@ If you get the word right, press **Got It**. If you're stuck, press **Skip**. Th
 ![Screenshot 0](screenshots/screen0.png) ![Screenshot 1](screenshots/screen1.png) ![Screenshot 2](screenshots/screen2.png)
 
 ## Nudennie's Notes on Project: 
+
+Software design principle this app will exemplify is 
+
+**Separation of Concerns** Divide your code into classes, each with separate, well-defined responsibilities
+Code is more Organized and Easier to debug. Code is much more Modular
+
+**Drive UI from a model** Models are components that are responsible for handling the data for an app. Independent from the UI Controller (View objects)
+and app components in the app. They are unaffected by the app's lifecycle. 
+
+
+**UI Controller** (Fragments/Activities) Displays data and captures OS and user events (user touches).
+
+**ViewModel** Holds all of the data needed for the UI and prepares it for display (this is where calculations are done), Holds LiveData classes
+ViewModel survives configuration changes. 
+
+**LiveData** LiveData classes are crucial for communicating information from the viewModel to the UI Controller that it should upadate and redraw the screen.

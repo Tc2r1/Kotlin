@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.nudennie.android.guesstheword
+package com.nudennie.guesstheword
 
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4

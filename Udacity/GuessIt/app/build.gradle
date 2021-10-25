@@ -69,4 +69,7 @@ dependencies {
 
     // Lifecycles
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+
+    // TIMBER
+    implementation 'com.jakewharton.timber:timber:4.7.1'
 }
