@@ -17,7 +17,6 @@
 package com.nudennie.guesstheword.screens.game
 
 import android.os.Bundle
-import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,7 +42,6 @@ class GameFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         // Inflate view and obtain an instance of the binding class
         binding = DataBindingUtil.inflate(
             inflater,
@@ -55,22 +53,9 @@ class GameFragment : Fragment() {
         Timber.i("GameFragment called ViewModelProvider!")
         viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
 
-        binding.correctButton.setOnClickListener {
-            viewModel.onCorrect()
-        }
-
-        binding.skipButton.setOnClickListener {
-            viewModel.onSkip()
-        }
-
-        /** LiveData Observers for updating the UI **/
-        viewModel.score.observe(viewLifecycleOwner, Observer { newScore ->
-            binding.scoreText.text = newScore.toString()
-        })
-
-        viewModel.word.observe(viewLifecycleOwner, Observer { word ->
-            binding.wordText.text = word
-        })
+        // Used Data binding to bind Model.
+        binding.gameViewModel = viewModel
+        binding.lifecycleOwner = this
 
         viewModel.eventGameFinished.observe(viewLifecycleOwner, Observer { isGameFinished ->
             if (isGameFinished) {
@@ -79,9 +64,7 @@ class GameFragment : Fragment() {
             }
         })
 
-        viewModel.currentTime.observe(viewLifecycleOwner, Observer { currentTime ->
-            binding.timerText.text = DateUtils.formatElapsedTime(currentTime).toString()
-        })
+
         return binding.root
     }
 

@@ -1,8 +1,10 @@
 package com.nudennie.guesstheword.screens.game
 
 import android.os.CountDownTimer
+import android.text.format.DateUtils
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import timber.log.Timber
 
@@ -28,11 +30,14 @@ class GameViewModel : ViewModel() {
     private var _eventGameFinished = MutableLiveData<Boolean>()
     private var _currentTime = MutableLiveData<Long>()
 
+
     // Encapsulation using Backing Properties.
     val word: LiveData<String> get() = _word
     val score: LiveData<Int> get() = _score
     val eventGameFinished: LiveData<Boolean> get() = _eventGameFinished
     val currentTime: LiveData<Long> get() = _currentTime
+    val currentTimeString = Transformations.map(currentTime) { time ->
+        DateUtils.formatElapsedTime(time) }
 
     // The list of words - the front of the list is the next word to guess
     private lateinit var wordList: MutableList<String>
