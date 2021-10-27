@@ -19,7 +19,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="scoreViewModel"
             type="com.nudennie.guesstheword.screens.score.ScoreViewModel" />

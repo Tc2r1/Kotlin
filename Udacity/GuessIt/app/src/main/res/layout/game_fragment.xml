@@ -64,7 +64,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/word_is_text"
             app:layout_constraintVertical_chainStyle="packed"
-            tools:text="@{@string/quote_format(gameViewModel.word)}" />
+            android:text="@{@string/quote_format(gameViewModel.word)}"
+            tools:text="&quot;Raindrops&quot;"/>
 
         <TextView
             android:id="@+id/timer_text"
@@ -80,7 +81,9 @@
             app:layout_constraintBottom_toTopOf="@+id/score_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:text="@{gameViewModel.currentTimeString" />
+            android:text="@{gameViewModel.currentTimeString}"
+            tools:text="0:00"/>
+
 
         <TextView
             android:id="@+id/score_text"
@@ -95,7 +98,8 @@
             app:layout_constraintBottom_toTopOf="@+id/guideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:text="@{@string/score_format(gameViewModel.score)}" />
+            android:text="@{@string/score_format(gameViewModel.score)}"
+            tools:text="Score: 2" />
 
         <Button
             android:id="@+id/skip_button"
