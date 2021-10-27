@@ -1,14 +1,14 @@
-package com.udacity.notepad.data
+package com.nudennie.notepad.data
 
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.provider.BaseColumns._ID
-import com.udacity.notepad.data.NotesContract.NoteTable.CREATED_AT
-import com.udacity.notepad.data.NotesContract.NoteTable.IS_PINNED
-import com.udacity.notepad.data.NotesContract.NoteTable.TEXT
-import com.udacity.notepad.data.NotesContract.NoteTable.UPDATED_AT
-import com.udacity.notepad.data.NotesContract.NoteTable._TABLE_NAME
+import com.nudennie.notepad.data.NotesContract.NoteTable.CREATED_AT
+import com.nudennie.notepad.data.NotesContract.NoteTable.IS_PINNED
+import com.nudennie.notepad.data.NotesContract.NoteTable.TEXT
+import com.nudennie.notepad.data.NotesContract.NoteTable.UPDATED_AT
+import com.nudennie.notepad.data.NotesContract.NoteTable._TABLE_NAME
 import org.jetbrains.anko.db.transaction
 import java.util.*
 

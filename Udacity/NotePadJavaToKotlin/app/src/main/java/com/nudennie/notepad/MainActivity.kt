@@ -1,13 +1,13 @@
-package com.udacity.notepad
+package com.nudennie.notepad
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
-import com.udacity.notepad.crud.CreateActivity
-import com.udacity.notepad.recycler.NotesAdapter
-import com.udacity.notepad.util.SpaceItemDecoration
+import com.nudennie.notepad.crud.CreateActivity
+import com.nudennie.notepad.recycler.NotesAdapter
+import com.nudennie.notepad.util.SpaceItemDecoration
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 

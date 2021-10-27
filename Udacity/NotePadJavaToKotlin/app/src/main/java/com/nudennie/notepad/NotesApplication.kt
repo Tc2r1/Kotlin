@@ -1,7 +1,7 @@
-package com.udacity.notepad
+package com.nudennie.notepad
 
 import android.app.Application
-import com.udacity.notepad.data.DataStore.init
+import com.nudennie.notepad.data.DataStore.init
 
 class NotesApplication : Application() {
     override fun onCreate() {

@@ -1,4 +1,4 @@
-package com.udacity.notepad.crud
+package com.nudennie.notepad.crud
 
 import android.content.Context
 import android.content.Intent
@@ -6,10 +6,10 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import com.udacity.notepad.R
-import com.udacity.notepad.data.DataStore.execute
-import com.udacity.notepad.data.DataStore.notes
-import com.udacity.notepad.data.Note
+import com.nudennie.notepad.R
+import com.nudennie.notepad.data.DataStore.execute
+import com.nudennie.notepad.data.DataStore.notes
+import com.nudennie.notepad.data.Note
 import kotlinx.android.synthetic.main.activity_create.*
 import java.util.*
 
