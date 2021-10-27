@@ -6,20 +6,38 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import com.nudennie.guesstheword.screens.game.GameViewModel.BuzzType.*
 import timber.log.Timber
 
+
+private val CORRECT_BUZZ_PATTERN = longArrayOf(100, 50, 50, 100, 100, 100)
+private val PANIC_BUZZ_PATTERN = longArrayOf(0, 200)
+private val GAME_OVER_BUZZ_PATTERN = longArrayOf(0, 1500)
+private val NO_BUZZ_PATTERN = longArrayOf(0)
+
+
 class GameViewModel : ViewModel() {
+
+    enum class BuzzType(val pattern: LongArray) {
+        CORRECT(CORRECT_BUZZ_PATTERN),
+        GAME_OVER(GAME_OVER_BUZZ_PATTERN),
+        COUNTDOWN_PANIC(PANIC_BUZZ_PATTERN),
+        NO_BUZZ(NO_BUZZ_PATTERN)
+    }
 
     companion object {
         // These represent different important times
         // This is when the game is over
-        const val DONE = 0L
+        private const val DONE = 0L
+
+        // This is the time when the phone will start buzzing each second
+        private const val COUNTDOWN_PANIC_SECONDS = 10L
 
         // This is the number of milliseconds in a second
-        const val ONE_SECOND = 1000L
+        private const val ONE_SECOND = 1000L
 
         // This is the total time of the game (60 seconds)
-        const val COUNTDOWN_TIME = 10000L
+        private const val COUNTDOWN_TIME = 20000L
     }
 
     private val timer: CountDownTimer
@@ -37,7 +55,13 @@ class GameViewModel : ViewModel() {
     val eventGameFinished: LiveData<Boolean> get() = _eventGameFinished
     val currentTime: LiveData<Long> get() = _currentTime
     val currentTimeString = Transformations.map(currentTime) { time ->
-        DateUtils.formatElapsedTime(time) }
+        DateUtils.formatElapsedTime(time)
+    }
+
+    // Event that triggers the phone to buzz using different patterns, determined by BuzzType
+    private val _eventBuzz = MutableLiveData<BuzzType>()
+    val eventBuzz: LiveData<BuzzType>
+        get() = _eventBuzz
 
     // The list of words - the front of the list is the next word to guess
     private lateinit var wordList: MutableList<String>
@@ -53,12 +77,16 @@ class GameViewModel : ViewModel() {
             override fun onTick(millisUntilFinished: Long) {
                 // count down
                 _currentTime.value = millisUntilFinished / ONE_SECOND
+                if (millisUntilFinished / ONE_SECOND <= COUNTDOWN_PANIC_SECONDS) {
+                    _eventBuzz.value = BuzzType.COUNTDOWN_PANIC
+                }
             }
 
             override fun onFinish() {
                 // End the game.
                 _currentTime.value = DONE
                 _eventGameFinished.value = true
+                _eventBuzz.value = GAME_OVER
             }
         }
 
@@ -120,7 +148,12 @@ class GameViewModel : ViewModel() {
 
     fun onCorrect() {
         _score.value = (score.value)?.plus(1)
+        _eventBuzz.value = CORRECT
         nextWord()
+    }
+
+    fun onBuzzCompelte() {
+        _eventBuzz.value = NO_BUZZ
     }
 
     fun onGameFinishedComplete() {
