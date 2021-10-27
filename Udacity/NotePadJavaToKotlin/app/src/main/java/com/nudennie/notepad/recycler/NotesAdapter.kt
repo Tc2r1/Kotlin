@@ -1,4 +1,4 @@
-package com.udacity.notepad.recycler
+package com.nudennie.notepad.recycler
 
 import android.content.Context
 import android.os.Handler
@@ -6,11 +6,11 @@ import android.os.Looper
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
-import com.udacity.notepad.R
-import com.udacity.notepad.data.DataStore
-import com.udacity.notepad.data.Note
-import com.udacity.notepad.recycler.NotesAdapter.NotesViewHolder
-import com.udacity.notepad.util.layoutInflater
+import com.nudennie.notepad.R
+import com.nudennie.notepad.data.DataStore
+import com.nudennie.notepad.data.Note
+import com.nudennie.notepad.recycler.NotesAdapter.NotesViewHolder
+import com.nudennie.notepad.util.layoutInflater
 import kotlinx.android.synthetic.main.item_note.view.*
 import java.util.*
 

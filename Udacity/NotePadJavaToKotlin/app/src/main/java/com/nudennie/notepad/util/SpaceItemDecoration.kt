@@ -1,4 +1,4 @@
-package com.udacity.notepad.util
+package com.nudennie.notepad.util
 
 import android.content.Context
 import android.graphics.Rect
