@@ -24,3 +24,35 @@ This app demonstrates the following knowledge.
 
 
 ## Tc2r1's Notes:
+
+
+*Callbacks*
+
+Code that heavily uses callbacks can become hard to read and harder to reason about. In addition, callbacks don't allow the use of some language features, such as exceptions.
+
+Kotlin coroutines lets you convert callback-based code to sequential code. Code written *sequentially* is typically easier to read and can even use language features such as Exceptions!
+
+
+**Suspend**
+
+The keyword suspend is Kotlin's way of marking a function, or function type, available to coroutines. When a coroutine calls a function marked suspend, instead of blocking until that function returns like a normal function call, it suspends execution until the result is ready then it resumes where it left off with the result. While it's suspended waiting for a result, it unblocks the thread that it's running on so other functions or coroutines can run.
+
+
+**CoroutineScope**
+
+In Kotlin, all coroutine run inside a coroutineScope. A scope controls the lifetime of coroutines through its job.
+when you cancel the job of a scope, it cancels all coroutines started in that scope. 
+
+
+
+** Dispatchers**
+
+For coroutines started by the UI, it is typically correct to start them on Dispatchers.Main which is the main thread on Android. A coroutine started on Dispatchers.Main won't block the main thread while suspended. Since a ViewModel coroutine almost always updates the UI on the main thread, starting coroutines on the main thread saves you extra thread switches. A coroutine started on the Main thread can switch dispatchers any time after it's started. For example, it can use another dispatcher to parse a large JSON result off the main thread.
+
+The AndroidX lifecycle-viewmodel-ktx library adds a CoroutineScope to ViewModels that's configured to start UI-related coroutines.
+
+The library adds a viewModelScope as an extension function of the ViewModel class. This scope is bound to Dispatchers.Main and will automatically be cancelled when the ViewModel is cleared.
+
+
+
+
