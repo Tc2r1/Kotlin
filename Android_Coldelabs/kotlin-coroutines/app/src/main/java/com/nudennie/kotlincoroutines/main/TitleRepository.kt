@@ -43,60 +43,17 @@ class TitleRepository(val network : MainNetwork, val titleDao : TitleDao) {
     val title : LiveData<String?> = titleDao.titleLiveData.map { it?.title }
 
     suspend fun refreshTitle() {
-        // interact with *blocking network and IO calls from a coroutine
-        withContext(Dispatchers.IO) {
-            val result = try {
-                // make network request using a blocking call
-                network.fetchNextTitle().execute()
-            } catch (cause : Throwable) {
-                // If the network throws an exception, inform the caller
-                throw TitleRefreshError("Unable to refresh title", cause)
-            }
-
-            yield()
-
-            if (result.isSuccessful) {
-                // Save result to database.
-                titleDao.insertTitle(Title(result.body()!!))
-            } else {
-                // if it is not successful, inform the callback of the error
-                throw TitleRefreshError("Unable to refresh Title", null)
-            }
-        }
-    }
-
-    /**
-     * Refresh the current title and save the results to the offline cache.
-     *
-     * This method does not return the new title. Use [TitleRepository.title] to observe
-     * the current tile.
-     */
-    fun refreshTitleWithCallbacks(titleRefreshCallback : TitleRefreshCallback) {
-        // This request will be run on a background thread by retrofit
-        BACKGROUND.submit {
-            try {
-                // Make network request using a blocking call
-                val result = network.fetchNextTitle().execute()
-                if (result.isSuccessful) {
-                    // Save it to database
-                    titleDao.insertTitle(Title(result.body()!!))
-                    // Inform the caller the refresh is completed
-                    titleRefreshCallback.onCompleted()
-                } else {
-                    // If it's not successful, inform the callback of the error
-                    titleRefreshCallback.onError(
-                        TitleRefreshError("Unable to refresh title", null)
-                    )
-                }
-            } catch (cause : Throwable) {
-                // If anything throws an exception, inform the caller
-                titleRefreshCallback.onError(
-                    TitleRefreshError("Unable to refresh title", cause)
-                )
-            }
+        try {
+            // make network request using a blocking call
+            val result = network.fetchNextTitle()
+            titleDao.insertTitle(Title(title = result))
+        } catch (cause : Throwable) {
+            // If the network throws an exception, inform the caller
+            throw TitleRefreshError("Unable to refresh title", cause)
         }
     }
 }
+
 
 /**
  * Thrown when there was a error fetching a new title
