@@ -17,13 +17,17 @@
 package com.nudennie.kotlincoroutines.main
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.google.common.truth.Truth
 import com.nudennie.kotlincoroutines.fakes.MainNetworkFake
 import com.nudennie.kotlincoroutines.fakes.TitleDaoFake
 import com.nudennie.kotlincoroutines.main.utils.MainCoroutineScopeRule
+import com.nudennie.kotlincoroutines.main.utils.getValueForTest
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
+@ExperimentalCoroutinesApi
 class MainViewModelTest {
     @get:Rule
     val coroutineScope = MainCoroutineScopeRule()
@@ -43,6 +47,9 @@ class MainViewModelTest {
 
     @Test
     fun whenMainClicked_updatesTaps() {
-        // TODO: Write this
+        subject.onMainViewClicked()
+        Truth.assertThat(subject.taps.getValueForTest()).isEqualTo("0 taps")
+        coroutineScope.advanceTimeBy(1_000)
+        Truth.assertThat(subject.taps.getValueForTest()).isEqualTo("1 taps")
     }
 }
