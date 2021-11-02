@@ -23,6 +23,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.nudennie.trackmysleepquality.R
 import com.nudennie.trackmysleepquality.database.SleepDatabase
 import com.nudennie.trackmysleepquality.databinding.FragmentSleepTrackerBinding
@@ -68,6 +69,18 @@ class SleepTrackerFragment : Fragment() {
             }
         })
 
+        viewModel.showSnackBarEvent.observe(viewLifecycleOwner, { showEvent ->
+            if (showEvent == true) {
+                activity?.let { it ->
+                    Snackbar.make(
+                        it.findViewById(android.R.id.content),
+                        getString(R.string.cleared_message),
+                        Snackbar.LENGTH_LONG
+                    ).show()
+                    viewModel.onSnackBarFinished()
+                }
+            }
+        })
         return binding.root
     }
 }
