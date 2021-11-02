@@ -16,26 +16,15 @@
 
 package com.nudennie.trackmysleepquality
 
-import androidx.lifecycle.*
 import androidx.room.Room
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import androidx.test.platform.app.InstrumentationRegistry
-import com.nudennie.trackmysleepquality.database.SleepDatabase
-import com.nudennie.trackmysleepquality.database.SleepDatabaseDao
-import com.nudennie.trackmysleepquality.database.SleepNight
+import com.nudennie.trackmysleepquality.database.*
+import org.junit.*
 import org.junit.Assert.assertEquals
-import org.junit.After
 import org.junit.Assert.assertNotEquals
-import org.junit.Before
-import org.junit.Test
 import org.junit.runner.RunWith
 import java.io.IOException
-import androidx.lifecycle.LifecycleOwner
-
-import androidx.lifecycle.LifecycleRegistry
-
-
-
 
 /**
  * This is not meant to be a full set of tests. For simplicity, most of your samples do not
@@ -46,8 +35,8 @@ import androidx.lifecycle.LifecycleRegistry
 @RunWith(AndroidJUnit4ClassRunner::class)
 class SleepDatabaseTest {
 
-    private lateinit var sleepDao: SleepDatabaseDao
-    private lateinit var db: SleepDatabase
+    private lateinit var sleepDao : SleepDatabaseDao
+    private lateinit var db : SleepDatabase
 
     @Before
     fun createDb() {
@@ -55,9 +44,9 @@ class SleepDatabaseTest {
         // Using an in-memory database because the information stored here disappears when the
         // process is killed.
         db = Room.inMemoryDatabaseBuilder(context, SleepDatabase::class.java)
-                // Allowing main thread queries, just for testing.
-                .allowMainThreadQueries()
-                .build()
+            // Allowing main thread queries, just for testing.
+            .allowMainThreadQueries()
+            .build()
         sleepDao = db.sleepDatabaseDao
     }
 
@@ -101,6 +90,5 @@ class SleepDatabaseTest {
         val quality = sleepDao.get(tonight.nightId).sleepQuality
         assertEquals(3, quality)
     }
-
 
 }

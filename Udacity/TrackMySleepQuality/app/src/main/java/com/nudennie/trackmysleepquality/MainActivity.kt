@@ -19,7 +19,6 @@ package com.nudennie.trackmysleepquality
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 
-
 /**
  * This is the toy app for lesson 6 of the
  * Android App Development in Kotlin course on Udacity(https://www.udacity.com/course/ud9012).
@@ -44,7 +43,7 @@ import androidx.appcompat.app.AppCompatActivity
  */
 class MainActivity : AppCompatActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState : Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)

@@ -37,6 +37,9 @@ class SleepTrackerViewModel(
     // Get all nights in the database when we create the viewModel
     private val nights = database.getAllNights()
 
+    /**
+     * Converted nights to Spanned for displaying.
+     */
     val nightsString = Transformations.map(nights) { nights ->
         formatNights(nights, application.resources)
     }
@@ -47,7 +50,7 @@ class SleepTrackerViewModel(
     }
 
     val stopButtonVisible = Transformations.map(tonight) {
-        // if tonight is not null, we want the response to be "true" aka visible.
+        // if tonight is set, we want the response to be "true" aka visible.
         null != it
     }
 
@@ -56,7 +59,16 @@ class SleepTrackerViewModel(
         it?.isNotEmpty()
     }
 
+    /**
+     * Request a toast by setting this value to true.
+     *
+     * This is private because we don't want to expose setting this value to the Fragment.
+     */
     private var _showSnackBarEvent = MutableLiveData<Boolean>()
+
+    /**
+     * If this is true, immediately `show()` a toast and call `onSnackBarFinished()`.
+     */
     val showSnackBarEvent : LiveData<Boolean>
         get() = _showSnackBarEvent
 
@@ -64,10 +76,25 @@ class SleepTrackerViewModel(
         _showSnackBarEvent.value = false
     }
 
+    /**
+     * Variable that tells the Fragment to navigate to a specific [SleepQualityFragment]
+     *
+     * This is private because we don't want to expose setting this value to the Fragment.
+     */
     private val _navigateToSleepQuality = MutableLiveData<SleepNight>()
+
+    /**
+     * If this is non-null, immediately navigate to [SleepQualityFragment] and call [doneNavigating]
+     */
     val navigateToSleepQuality : LiveData<SleepNight>
         get() = _navigateToSleepQuality
 
+    /**
+     * Call this immediately after calling `show()` on a toast.
+     *
+     * It will clear the toast request, so if the user rotates their phone it won't show a duplicate
+     * toast.
+     */
     fun onNavigationFinished() {
         _navigateToSleepQuality.value = null
     }
@@ -84,6 +111,13 @@ class SleepTrackerViewModel(
         }
     }
 
+    /**
+     *  Handling the case of the stopped app or forgotten recording,
+     *  the start and end times will be the same.j
+     *
+     *  If the start time and end time are not the same, then we do not have an unfinished
+     *  recording.
+     */
     private suspend fun getTonightFromDatabase() : SleepNight? {
         return withContext(Dispatchers.IO) {
             var night = database.getTonight()
@@ -94,8 +128,13 @@ class SleepTrackerViewModel(
         }
     }
 
+    /**
+     * Executes when the START button is clicked.
+     */
     fun onStartTracking() {
         uiScope.launch {
+            // Create a new night, which captures the current time,
+            // and insert it into the database.
             val newNight = SleepNight()
             insert(newNight)
 

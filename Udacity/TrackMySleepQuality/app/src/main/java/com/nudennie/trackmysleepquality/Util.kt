@@ -32,7 +32,7 @@ import java.text.SimpleDateFormat
 /**
  * Returns a string representing the numeric quality rating.
  */
-fun convertNumericQualityToString(quality: Int, resources: Resources): String {
+fun convertNumericQualityToString(quality : Int, resources : Resources) : String {
     var qualityString = resources.getString(R.string.three_ok)
     when (quality) {
         -1 -> qualityString = "--"
@@ -45,7 +45,6 @@ fun convertNumericQualityToString(quality: Int, resources: Resources): String {
     return qualityString
 }
 
-
 /**
  * Take the Long milliseconds returned by the system and stored in Room,
  * and convert it to a nicely formatted string for display.
@@ -56,9 +55,9 @@ fun convertNumericQualityToString(quality: Int, resources: Resources): String {
  * HH:mm - Hours and minutes in 24hr format
  */
 @SuppressLint("SimpleDateFormat")
-fun convertLongToDateString(systemTime: Long): String {
+fun convertLongToDateString(systemTime : Long) : String {
     return SimpleDateFormat("EEEE MMM-dd-yyyy' Time: 'HH:mm")
-            .format(systemTime).toString()
+        .format(systemTime).toString()
 }
 
 /**
@@ -74,7 +73,7 @@ fun convertLongToDateString(systemTime: Long): String {
  * @return  Spanned - An interface for text that has formatting attached to it.
  *           See: https://developer.android.com/reference/android/text/Spanned
  */
-fun formatNights(nights: List<SleepNight>, resources: Resources): Spanned {
+fun formatNights(nights : List<SleepNight>, resources : Resources) : Spanned {
     val sb = StringBuilder()
     sb.apply {
         append(resources.getString(R.string.title))

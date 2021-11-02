@@ -72,10 +72,21 @@ Coroutines are Sequential
 
 In fragment first reference application = this.activity.application
 
-arguements = FragmentArgs.fromBundle(arguements)
+Arguements = FragmentArgs.fromBundle(arguements)
 
 dataSource = database.getInstance(application).dao
 
-factory = Factory(safeargs)
+Factory = Factory(safeargs)
 
-viewmodal = ViewModelProvider(owner, factory)[class]
+VieModal = ViewModelProvider(owner, factory)[class]
+
+## Tc2r1's RECAP
+
+* Used a Room Database to store retrieve and update my data.
+* Created a sleepNights data class to define a database table and it's structure.
+* Made a Data Access Object to define the API for our database, creating mappings between kotlin functions and SQLite queries.
+* I made a room database singleton.
+* ViewModelFactory for dependency injection.
+* Added ViewModels to manage database operations and handle user clicks.
+* Used Coroutines to make sure the database operations don't interfere with a smooth user experience.
+* Implemented Observable state variables to keep UI operations, such as navigation in the fragment.

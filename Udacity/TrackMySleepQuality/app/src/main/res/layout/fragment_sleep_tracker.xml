@@ -23,6 +23,7 @@
          the whole ViewModel, so that we can access the LiveData,
          click handlers, and state variables. -->
     <data>
+
         <variable
             name="sleepTrackerViewModel"
             type="com.nudennie.trackmysleepquality.sleeptracker.SleepTrackerViewModel" />
@@ -77,7 +78,7 @@
             app:layout_constraintEnd_toStartOf="@+id/stop_button"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toStartOf="parent"
-            android:enabled="@{sleepTrackerViewModel.startButtonVisible}"/>
+            android:enabled="@{sleepTrackerViewModel.startButtonVisible}" />
 
         <Button
             android:id="@+id/stop_button"
@@ -91,7 +92,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/start_button"
             app:layout_constraintTop_toTopOf="parent"
-            android:enabled="@{sleepTrackerViewModel.stopButtonVisible}"/>
+            android:enabled="@{sleepTrackerViewModel.stopButtonVisible}" />
 
         <Button
             android:id="@+id/clear_button"
@@ -106,7 +107,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:enabled="@{sleepTrackerViewModel.clearButtonVisible}"/>
+            android:enabled="@{sleepTrackerViewModel.clearButtonVisible}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

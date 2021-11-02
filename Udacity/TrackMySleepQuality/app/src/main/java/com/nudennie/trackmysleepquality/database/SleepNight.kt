@@ -22,15 +22,15 @@ import androidx.room.*
 data class SleepNight(
 
     @PrimaryKey(autoGenerate = true)
-    val nightId: Long = 0L,
+    val nightId : Long = 0L,
 
     @ColumnInfo(name = "start_time_milli")
-    val startTimeMilli: Long = System.currentTimeMillis(),
+    val startTimeMilli : Long = System.currentTimeMillis(),
 
     @ColumnInfo(name = "end_time_milli")
-    var endTimeMilli: Long = startTimeMilli,
+    var endTimeMilli : Long = startTimeMilli,
 
     @ColumnInfo(name = "quality_rating")
-    var sleepQuality: Int = -1
+    var sleepQuality : Int = -1
 
 )
