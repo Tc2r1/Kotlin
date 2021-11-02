@@ -19,6 +19,7 @@ package com.nudennie.kotlincoroutines.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import com.nudennie.kotlincoroutines.util.BACKGROUND
+import kotlinx.coroutines.*
 
 /**
  * TitleRepository provides an interface to fetch a title or request a new one be generated.
@@ -28,7 +29,7 @@ import com.nudennie.kotlincoroutines.util.BACKGROUND
  * when data is updated. You can consider repositories to be mediators between different data
  * sources, in our case it mediates between a network API and an offline database cache.
  */
-class TitleRepository(val network: MainNetwork, val titleDao: TitleDao) {
+class TitleRepository(val network : MainNetwork, val titleDao : TitleDao) {
 
     /**
      * [LiveData] to load title.
@@ -39,10 +40,30 @@ class TitleRepository(val network: MainNetwork, val titleDao: TitleDao) {
      * Observing this will not cause the title to be refreshed, use [TitleRepository.refreshTitleWithCallbacks]
      * to refresh the title.
      */
-    val title: LiveData<String?> = titleDao.titleLiveData.map { it?.title }
+    val title : LiveData<String?> = titleDao.titleLiveData.map { it?.title }
 
+    suspend fun refreshTitle() {
+        // interact with *blocking network and IO calls from a coroutine
+        withContext(Dispatchers.IO) {
+            val result = try {
+                // make network request using a blocking call
+                network.fetchNextTitle().execute()
+            } catch (cause : Throwable) {
+                // If the network throws an exception, inform the caller
+                throw TitleRefreshError("Unable to refresh title", cause)
+            }
 
-    // TODO: Add coroutines-based `fun refreshTitle` here
+            yield()
+
+            if (result.isSuccessful) {
+                // Save result to database.
+                titleDao.insertTitle(Title(result.body()!!))
+            } else {
+                // if it is not successful, inform the callback of the error
+                throw TitleRefreshError("Unable to refresh Title", null)
+            }
+        }
+    }
 
     /**
      * Refresh the current title and save the results to the offline cache.
@@ -50,7 +71,7 @@ class TitleRepository(val network: MainNetwork, val titleDao: TitleDao) {
      * This method does not return the new title. Use [TitleRepository.title] to observe
      * the current tile.
      */
-    fun refreshTitleWithCallbacks(titleRefreshCallback: TitleRefreshCallback) {
+    fun refreshTitleWithCallbacks(titleRefreshCallback : TitleRefreshCallback) {
         // This request will be run on a background thread by retrofit
         BACKGROUND.submit {
             try {
@@ -64,12 +85,14 @@ class TitleRepository(val network: MainNetwork, val titleDao: TitleDao) {
                 } else {
                     // If it's not successful, inform the callback of the error
                     titleRefreshCallback.onError(
-                            TitleRefreshError("Unable to refresh title", null))
+                        TitleRefreshError("Unable to refresh title", null)
+                    )
                 }
-            } catch (cause: Throwable) {
+            } catch (cause : Throwable) {
                 // If anything throws an exception, inform the caller
                 titleRefreshCallback.onError(
-                        TitleRefreshError("Unable to refresh title", cause))
+                    TitleRefreshError("Unable to refresh title", cause)
+                )
             }
         }
     }
@@ -81,9 +104,9 @@ class TitleRepository(val network: MainNetwork, val titleDao: TitleDao) {
  * @property message user ready error message
  * @property cause the original cause of this exception
  */
-class TitleRefreshError(message: String, cause: Throwable?) : Throwable(message, cause)
+class TitleRefreshError(message : String, cause : Throwable?) : Throwable(message, cause)
 
 interface TitleRefreshCallback {
     fun onCompleted()
-    fun onError(cause: Throwable)
+    fun onError(cause : Throwable)
 }
