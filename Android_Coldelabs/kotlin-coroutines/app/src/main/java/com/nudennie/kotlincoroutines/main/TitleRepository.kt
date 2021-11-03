@@ -18,7 +18,6 @@ package com.nudennie.kotlincoroutines.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
-import com.nudennie.kotlincoroutines.util.BACKGROUND
 import kotlinx.coroutines.*
 
 /**
@@ -45,15 +44,17 @@ class TitleRepository(val network : MainNetwork, val titleDao : TitleDao) {
     suspend fun refreshTitle() {
         try {
             // make network request using a blocking call
-            val result = network.fetchNextTitle()
+            val result = withTimeout(5_000) {
+                network.fetchNextTitle()
+            }
             titleDao.insertTitle(Title(title = result))
+
         } catch (cause : Throwable) {
             // If the network throws an exception, inform the caller
             throw TitleRefreshError("Unable to refresh title", cause)
         }
     }
 }
-
 
 /**
  * Thrown when there was a error fetching a new title
