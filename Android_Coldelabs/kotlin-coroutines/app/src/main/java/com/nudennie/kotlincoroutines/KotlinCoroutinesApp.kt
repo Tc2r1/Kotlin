@@ -17,12 +17,9 @@
 package com.nudennie.kotlincoroutines
 
 import android.app.Application
-import androidx.work.Configuration
-import androidx.work.Constraints
+import androidx.work.*
 import androidx.work.ExistingPeriodicWorkPolicy.KEEP
 import androidx.work.NetworkType.UNMETERED
-import androidx.work.PeriodicWorkRequestBuilder
-import androidx.work.WorkManager
 import com.nudennie.kotlincoroutines.main.RefreshMainDataWork
 import java.util.concurrent.TimeUnit
 
@@ -47,25 +44,25 @@ class KotlinCoroutinesApp : Application() {
     private fun setupWorkManagerJob() {
         // initialize WorkManager with a Factory
         val workManagerConfiguration = Configuration.Builder()
-                .setWorkerFactory(RefreshMainDataWork.Factory())
-                .build()
+            .setWorkerFactory(RefreshMainDataWork.Factory())
+            .build()
         WorkManager.initialize(this, workManagerConfiguration)
 
         // Use constraints to require the work only run when the device is charging and the
         // network is unmetered
         val constraints = Constraints.Builder()
-                .setRequiresCharging(true)
-                .setRequiredNetworkType(UNMETERED)
-                .build()
+            .setRequiresCharging(true)
+            .setRequiredNetworkType(UNMETERED)
+            .build()
 
         // Specify that the work should attempt to run every day
         val work = PeriodicWorkRequestBuilder<RefreshMainDataWork>(1, TimeUnit.DAYS)
-                .setConstraints(constraints)
-                .build()
+            .setConstraints(constraints)
+            .build()
 
         // Enqueue it work WorkManager, keeping any previously scheduled jobs for the same
         // work.
         WorkManager.getInstance(this)
-                .enqueueUniquePeriodicWork(RefreshMainDataWork::class.java.name, KEEP, work)
+            .enqueueUniquePeriodicWork(RefreshMainDataWork::class.java.name, KEEP, work)
     }
 }

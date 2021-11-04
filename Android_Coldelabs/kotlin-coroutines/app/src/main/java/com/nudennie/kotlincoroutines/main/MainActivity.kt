@@ -24,8 +24,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.observe
-import com.nudennie.kotlincoroutines.R
 import com.google.android.material.snackbar.Snackbar
+import com.nudennie.kotlincoroutines.R
 
 /**
  * Show layout.activity_main and setup data binding.
@@ -35,22 +35,22 @@ class MainActivity : AppCompatActivity() {
     /**
      * Inflate layout.activity_main and setup data binding.
      */
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState : Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
 
-        val rootLayout: ConstraintLayout = findViewById(R.id.rootLayout)
-        val title: TextView = findViewById(R.id.title)
-        val taps: TextView = findViewById(R.id.taps)
-        val spinner: ProgressBar = findViewById(R.id.spinner)
+        val rootLayout : ConstraintLayout = findViewById(R.id.rootLayout)
+        val title : TextView = findViewById(R.id.title)
+        val taps : TextView = findViewById(R.id.taps)
+        val spinner : ProgressBar = findViewById(R.id.spinner)
 
         // Get MainViewModel by passing a database to the factory
         val database = getDatabase(this)
         val repository = TitleRepository(getNetworkService(), database.titleDao)
         val viewModel = ViewModelProviders
-                .of(this, MainViewModel.FACTORY(repository))
-                .get(MainViewModel::class.java)
+            .of(this, MainViewModel.FACTORY(repository))
+            .get(MainViewModel::class.java)
 
         // When rootLayout is clicked call onMainViewClicked in ViewModel
         rootLayout.setOnClickListener {
