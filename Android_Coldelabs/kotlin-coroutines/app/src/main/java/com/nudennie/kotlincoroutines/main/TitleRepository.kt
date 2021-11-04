@@ -41,6 +41,13 @@ class TitleRepository(val network : MainNetwork, val titleDao : TitleDao) {
      */
     val title : LiveData<String?> = titleDao.titleLiveData.map { it?.title }
 
+
+    /**
+     * Refresh the current title and save the results to the offline cache.
+     *
+     * This method does not return the new title. Use [TitleRepository.title] to observe
+     * the current tile.
+     */
     suspend fun refreshTitle() {
         try {
             // make network request using a blocking call
@@ -63,8 +70,3 @@ class TitleRepository(val network : MainNetwork, val titleDao : TitleDao) {
  * @property cause the original cause of this exception
  */
 class TitleRefreshError(message : String, cause : Throwable?) : Throwable(message, cause)
-
-interface TitleRefreshCallback {
-    fun onCompleted()
-    fun onError(cause : Throwable)
-}

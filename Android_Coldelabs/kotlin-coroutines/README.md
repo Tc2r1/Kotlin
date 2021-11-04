@@ -62,6 +62,17 @@ A **rule** is a way to run code before and after the execution of a test in JUni
 
 **MainCoroutineScopeRule** is a custom rule in this codebase that configures Dispatchers.Main to use a TestCoroutineDispatcher from kotlinx-coroutines-test. This allows tests to advance a virtual-clock for testing, and allows code to use Dispatchers.Main in unit tests.
 
+**WorkManager** is a compatible, flexible, and simple library for deferrable background work. 
+
+##Remarks
+
+In this codelab I have covered the basics I'll need to start using coroutines in my app!
+
+    How to integrate coroutines to Android apps from both the UI and WorkManager jobs to simplify asynchronous programming,
+    How to use coroutines inside a ViewModel to fetch data from the network and save it to a database without blocking the main thread.
+    And how to cancel all coroutines when the ViewModel is finished.
+
+For testing coroutine based code, I covered both by testing behavior and directly calling suspend functions from tests.
 
 
 

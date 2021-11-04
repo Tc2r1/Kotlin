@@ -17,7 +17,6 @@
 package com.nudennie.kotlincoroutines.main
 
 import androidx.lifecycle.*
-import com.nudennie.kotlincoroutines.util.BACKGROUND
 import com.nudennie.kotlincoroutines.util.singleArgViewModelFactory
 import kotlinx.coroutines.*
 
@@ -29,7 +28,7 @@ import kotlinx.coroutines.*
  *
  * @param repository the data source this ViewModel will fetch results from.
  */
-class MainViewModel(private val repository: TitleRepository) : ViewModel() {
+class MainViewModel(private val repository : TitleRepository) : ViewModel() {
 
     companion object {
         /**
@@ -53,7 +52,7 @@ class MainViewModel(private val repository: TitleRepository) : ViewModel() {
     /**
      * Request a snackbar to display a string.
      */
-    val snackbar: LiveData<String?>
+    val snackbar : LiveData<String?>
         get() = _snackBar
 
     /**
@@ -66,7 +65,7 @@ class MainViewModel(private val repository: TitleRepository) : ViewModel() {
     /**
      * Show a loading spinner if true
      */
-    val spinner: LiveData<Boolean>
+    val spinner : LiveData<Boolean>
         get() = _spinner
 
     /**
@@ -82,7 +81,7 @@ class MainViewModel(private val repository: TitleRepository) : ViewModel() {
     /**
      * Public view of tap live data.
      */
-    val taps: LiveData<String>
+    val taps : LiveData<String>
         get() = _taps
 
     /**
@@ -122,25 +121,22 @@ class MainViewModel(private val repository: TitleRepository) : ViewModel() {
     /**
      * Refresh the title, showing a loading spinner while it refreshes and errors via snackbar.
      */
-    fun refreshTitle() {
-        launchDataLoad {
+    fun refreshTitle() = launchDataLoad {
             repository.refreshTitle()
         }
-    }
 
-    private fun launchDataLoad(block: suspend () -> Unit) : Job {
-        return viewModelScope.launch {
+
+    private fun launchDataLoad(block : suspend () -> Unit): Unit {
+        viewModelScope.launch {
             try {
                 _spinner.value = true
                 block()
-            } catch (error: TitleRefreshError) {
+            } catch (error : TitleRefreshError) {
                 _snackBar.value = error.message
             } finally {
-                _spinner.value =false
+                _spinner.value = false
             }
         }
     }
-
-
 
 }

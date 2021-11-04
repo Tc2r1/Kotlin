@@ -18,23 +18,14 @@ package com.nudennie.kotlincoroutines.fakes
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.nudennie.kotlincoroutines.main.MainNetwork
-import com.nudennie.kotlincoroutines.main.Title
-import com.nudennie.kotlincoroutines.main.TitleDao
-import kotlinx.coroutines.CompletableDeferred
-import kotlinx.coroutines.TimeoutCancellationException
+import com.nudennie.kotlincoroutines.main.*
+import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withTimeout
-import okhttp3.Request
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 /**
  * Fake [TitleDao] for use in tests.
  */
-class TitleDaoFake(initialTitle: String) : TitleDao {
+class TitleDaoFake(initialTitle : String) : TitleDao {
     /**
      * A channel is a Coroutines based implementation of a blocking queue.
      *
@@ -45,14 +36,14 @@ class TitleDaoFake(initialTitle: String) : TitleDao {
      */
     private val insertedForNext = Channel<Title>(capacity = Channel.BUFFERED)
 
-    override suspend fun insertTitle(title: Title) {
-        insertedForNext.offer(title)
+    override suspend fun insertTitle(title : Title) {
+        insertedForNext.send(title)
         _titleLiveData.value = title
     }
 
     private val _titleLiveData = MutableLiveData<Title?>(Title(initialTitle))
 
-    override val titleLiveData: LiveData<Title?>
+    override val titleLiveData : LiveData<Title?>
         get() = _titleLiveData
 
     /**
@@ -71,15 +62,15 @@ class TitleDaoFake(initialTitle: String) : TitleDao {
      * @param unit timeunit
      * @return the next value that was inserted into this dao, or null if none found
      */
-    fun nextInsertedOrNull(timeout: Long = 2_000): String? {
-        var result: String? = null
+    fun nextInsertedOrNull(timeout : Long = 2_000) : String? {
+        var result : String? = null
         runBlocking {
             // wait for the next insertion to complete
             try {
                 withTimeout(timeout) {
                     result = insertedForNext.receive().title
                 }
-            } catch (ex: TimeoutCancellationException) {
+            } catch (ex : TimeoutCancellationException) {
                 // ignore
             }
         }
@@ -90,7 +81,7 @@ class TitleDaoFake(initialTitle: String) : TitleDao {
 /**
  * Testing Fake implementation of MainNetwork
  */
-class MainNetworkFake(var result: String) : MainNetwork {
+class MainNetworkFake(var result : String) : MainNetwork {
     override suspend fun fetchNextTitle() = result
 }
 
@@ -100,49 +91,16 @@ class MainNetworkFake(var result: String) : MainNetwork {
 class MainNetworkCompletableFake() : MainNetwork {
     private var completable = CompletableDeferred<String>()
 
-    override suspend fun fetchNextTitle() = completable.await()
+    override suspend fun fetchNextTitle() : String = completable.await()
 
-    fun sendCompletionToAllCurrentRequests(result: String) {
+    fun sendCompletionToAllCurrentRequests(result : String) {
         completable.complete(result)
         completable = CompletableDeferred()
     }
 
-    fun sendErrorToCurrentRequests(throwable: Throwable) {
+    fun sendErrorToCurrentRequests(throwable : Throwable) {
         completable.completeExceptionally(throwable)
         completable = CompletableDeferred()
-    }
-
-}
-
-typealias MakeCompilerHappyForStarterCode = FakeCallForRetrofit<String>
-
-/**
- * This class only exists to make the starter code compile. Remove after refactoring retrofit to use
- * suspend functions.
- */
-class FakeCallForRetrofit<T> : Call<T> {
-    override fun enqueue(callback: Callback<T>) {
-        // nothing
-    }
-
-    override fun isExecuted() = false
-
-    override fun clone(): Call<T> {
-        return this
-    }
-
-    override fun isCanceled() = true
-
-    override fun cancel() {
-        // nothing
-    }
-
-    override fun execute(): Response<T> {
-        TODO("Not implemented")
-    }
-
-    override fun request(): Request {
-        TODO("Not implemented")
     }
 
 }
