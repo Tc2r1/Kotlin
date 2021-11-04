@@ -38,12 +38,12 @@ import androidx.lifecycle.ViewModelProvider
  * the constructor)
  * @return a function of one argument that returns ViewModelProvider.Factory for ViewModelProviders
  */
-fun <T : ViewModel, A> singleArgViewModelFactory(constructor: (A) -> T):
+fun <T : ViewModel, A> singleArgViewModelFactory(constructor : (A) -> T) :
             (A) -> ViewModelProvider.NewInstanceFactory {
-    return { arg: A ->
+    return { arg : A ->
         object : ViewModelProvider.NewInstanceFactory() {
             @Suppress("UNCHECKED_CAST")
-            override fun <V : ViewModel> create(modelClass: Class<V>): V {
+            override fun <V : ViewModel> create(modelClass : Class<V>) : V {
                 return constructor(arg) as V
             }
         }

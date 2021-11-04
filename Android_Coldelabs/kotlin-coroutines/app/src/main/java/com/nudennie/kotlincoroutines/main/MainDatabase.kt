@@ -51,7 +51,7 @@ private lateinit var INSTANCE : TitleDatabase
 /**
  * Instantiate a database from a context.
  */
-fun getDatabase(context: Context): TitleDatabase {
+fun getDatabase(context : Context) : TitleDatabase {
     synchronized(TitleDatabase::class) {
         if (!::INSTANCE.isInitialized) {
             INSTANCE = Room
