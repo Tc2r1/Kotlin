@@ -23,24 +23,24 @@ import com.nudennie.trackmysleepquality.*
 import com.nudennie.trackmysleepquality.database.SleepNight
 
 @BindingAdapter("sleepDurationFormatted")
-fun TextView.setSleepDurationFormatted(item : SleepNight?) {
+fun TextView.setSleepDurationFormatted(item: SleepNight?) {
     item?.let {
         text = convertDurationToFormatted(item.startTimeMilli, item.endTimeMilli, context.resources)
     }
 }
 
 @BindingAdapter("sleepQualityString")
-fun TextView.setSleepQualityString(item : SleepNight?) {
+fun TextView.setSleepQualityString(item: SleepNight?) {
     item?.let {
         text = convertNumericQualityToString(item.sleepQuality, context.resources)
     }
 }
 
 @BindingAdapter("sleepImage")
-fun ImageView.setSleepImage(item : SleepNight?) {
+fun ImageView.setSleepImage(item: SleepNight?) {
     item?.let {
         setImageResource(
-            when (item.sleepQuality) {
+            when(item.sleepQuality) {
                 0 -> R.drawable.ic_sleep_0
                 1 -> R.drawable.ic_sleep_1
                 2 -> R.drawable.ic_sleep_2

@@ -32,3 +32,9 @@ This app builds on the SleepQualityTracker you developed in Lesson 6.  In this l
 ![Screenshot2](screenshots/sleep_tracker_recycler_detail.png)
 
 Tc2r's Remarks:
+ * Practiced separation of concerns into different classes.
+ * Used DiffUtils for item callbacks. 
+ * Used a Sealed Data Class. 
+ * Used Adapter Pattern to translate between the data and the view. 
+ * Utilized different layout managers and modified the properties to customize gridlayout
+

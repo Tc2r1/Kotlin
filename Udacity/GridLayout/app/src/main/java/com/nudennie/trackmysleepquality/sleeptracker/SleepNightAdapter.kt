@@ -21,9 +21,7 @@ import androidx.recyclerview.widget.*
 import com.nudennie.trackmysleepquality.R
 import com.nudennie.trackmysleepquality.database.SleepNight
 import com.nudennie.trackmysleepquality.databinding.ListItemSleepNightBinding
-import com.nudennie.trackmysleepquality.sleeptracker.SleepNightAdapter.ViewHolder
 import kotlinx.coroutines.*
-import java.lang.ClassCastException
 
 private const val ITEM_VIEW_TYPE_HEADER = 0
 private const val ITEM_VIEW_TYPE_ITEM = 1
@@ -46,7 +44,7 @@ class SleepNightAdapter(val clickListener: SleepNightListener) : ListAdapter<Dat
         }
     }
 
-    fun addHeaderAndSubmitList(list:List<SleepNight>?) {
+    fun addHeaderAndSubmitList(list: List<SleepNight>?) {
         adapterScope.launch {
             val items = when(list) {
                 null -> listOf(DataItem.Header)
@@ -88,7 +86,7 @@ class SleepNightAdapter(val clickListener: SleepNightListener) : ListAdapter<Dat
         }
     }
 
-    class TextViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    class TextViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         companion object {
             fun from(parent: ViewGroup): TextViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
@@ -116,10 +114,10 @@ class SleepNightListener(val clickListener: (sleepId: Long) -> Unit) {
 
 sealed class DataItem {
     data class SleepNightItem(val sleepNight: SleepNight) : DataItem() {
-        override val id  = sleepNight.nightId
+        override val id = sleepNight.nightId
     }
 
-    object Header: DataItem() {
+    object Header : DataItem() {
         override val id: Long
             get() = Long.MIN_VALUE
     }
