@@ -33,6 +33,7 @@
     <string name="quality_3">Sleep Quality 3</string>
     <string name="quality_4">Sleep Quality 4</string>
     <string name="quality_5">Sleep Quality 5</string>
+    <string name="image_quaility_emoji">Image Quality Emoji</string>
 
     <!-- Output to TextView styled with a little HTML -->
     <string name="title"><![CDATA[<h3>HERE IS YOUR SLEEP DATA</h3>]]></string>
