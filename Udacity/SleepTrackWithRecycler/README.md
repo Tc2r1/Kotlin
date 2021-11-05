@@ -29,6 +29,16 @@ This app builds on the SleepQualityTracker you developed in Lesson 6.  In this l
 ![Screenshot1](screenshots/sleep_tracker_recycler_home.png)
 ![Screenshot2](screenshots/sleep_tracker_recycler_detail.png)
 
+Tc2r's Remarks:
 
+In this lesson I covered the basics of RecyclerView, what an adapter is, how to implement a recyclerview adapter
+and a ViewHolder.
 
+How to use DiffUtils to optimize updating the data in the recyclerview.
+* By using DiffUtils updating a single element in the list will only update that view on the scren.
 
+How to integrate Databnding into a recyclerview adapter.
+* This shortens the code of the View ViewHolder
+* Better structures the code.
+
+How to use Binding Adapters to update views. 
