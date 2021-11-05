@@ -7,12 +7,16 @@
         <variable
             name="sleep"
             type="com.nudennie.trackmysleepquality.database.SleepNight" />
+        <variable
+            name="clickListener"
+            type="com.nudennie.trackmysleepquality.sleeptracker.SleepNightListener"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:onClick="@{() -> clickListener.onClick(sleep)}">
 
         <ImageView
             android:id="@+id/quality_image"
