@@ -20,14 +20,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.*
+import androidx.recyclerview.widget.GridLayoutManager
 import com.nudennie.trackmysleepquality.R
 import com.nudennie.trackmysleepquality.database.SleepDatabase
 import com.nudennie.trackmysleepquality.databinding.FragmentSleepTrackerBinding
@@ -64,7 +63,15 @@ class SleepTrackerFragment : Fragment() {
 
         binding.sleepTrackerViewModel = sleepTrackerViewModel
 
-        val manager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+        val manager = GridLayoutManager(activity, 3)
+
+        manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int) = when(position) {
+                0 -> 3
+                else ->1
+            }
+        }
+
         binding.sleepList.layoutManager = manager
 
         val adapter = SleepNightAdapter(SleepNightListener {
