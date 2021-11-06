@@ -38,3 +38,18 @@ The Network Layer is the Api that the ViewModel will use to communicate with a w
 
 The Moshi Library parses Json into Json Objects
 
+
+**Retrofit  has Coroutine Support**
+
+Using the Library "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:" Retrofit is able 
+to add a CoroutineCallAdapterFactory.
+
+This enables retrofit to produce a Coroutine based Api.
+The CoroutineCallAdapterFactory allows the ability to replace the "Call" in the Service methods with Deferred from Coroutines.
+
+Deferred is a type of non-blocking Cancellable job that can directly return a result.
+
+Because Retrofit does everything on a background thread, we can use the UI thread andd dont need any other threads. 
+
+When using CoroutineScope/ Jobs in ViewModel, don't forget to cancel them in the OnClear Lifecycle. 
+
