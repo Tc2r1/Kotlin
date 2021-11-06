@@ -2,6 +2,7 @@ package com.nudennie.marsrealestate.overview
 
 import androidx.lifecycle.*
 import com.nudennie.marsrealestate.network.MarsApi
+import com.nudennie.marsrealestate.network.MarsProperty
 import retrofit2.*
 
 /**
@@ -27,12 +28,12 @@ class OverviewViewModel : ViewModel() {
      * Sets the value of the status LiveData to the Mars API status.
      */
     private fun getMarsRealEstateProperties() {
-        MarsApi.retrofitService.getProperties().enqueue(object: Callback<String> {
-            override fun onResponse(call: Call<String>, response: Response<String>) {
-                _response.value = response.body()
+        MarsApi.retrofitService.getProperties().enqueue(object: Callback<List<MarsProperty>> {
+            override fun onResponse(call: Call<List<MarsProperty>>, response: Response<List<MarsProperty>>) {
+                _response.value = "Success: ${response.body()?.size} Mars properties were retrieved"
             }
 
-            override fun onFailure(call: Call<String>, t: Throwable) {
+            override fun onFailure(call: Call<List<MarsProperty>>, t: Throwable) {
                 _response.value = "Failure: ${t.message}"
             }
 
