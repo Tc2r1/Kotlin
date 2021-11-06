@@ -51,5 +51,7 @@ Deferred is a type of non-blocking Cancellable job that can directly return a re
 
 Because Retrofit does everything on a background thread, we can use the UI thread andd dont need any other threads. 
 
-When using CoroutineScope/ Jobs in ViewModel, don't forget to cancel them in the OnClear Lifecycle. 
+When using CoroutineScope/ Jobs in ViewModel, don't forget to cancel them in the OnClear Lifecycle.
+
+Built a bindingAdapter that takes the url from an xml attribute associated with an imageview and use glide to load the image
 
