@@ -29,4 +29,12 @@ It leverages the following components from the Jetpack library:
 
 ## Tc2r's Notes
 
+[Scalar](https://square.github.io/retrofit/) is a library that allows retrofit to return the json result as a String.
+
+Retrofit is a library that creates a network API for an application. Based on the content from a web service
+
+The Network Layer is the Api that the ViewModel will use to communicate with a web service.
+
+
+The Moshi Library parses Json into Json Objects
 
