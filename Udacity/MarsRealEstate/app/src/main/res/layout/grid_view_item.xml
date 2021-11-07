@@ -22,10 +22,12 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="property"
             type="com.nudennie.marsrealestate.network.MarsProperty"/>
     </data>
+
     <ImageView
         android:id="@+id/mars_image"
         android:layout_width="match_parent"

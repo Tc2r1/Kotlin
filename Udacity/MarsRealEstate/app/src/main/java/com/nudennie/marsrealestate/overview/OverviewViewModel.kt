@@ -1,8 +1,7 @@
 package com.nudennie.marsrealestate.overview
 
 import androidx.lifecycle.*
-import com.nudennie.marsrealestate.network.MarsApi
-import com.nudennie.marsrealestate.network.MarsProperty
+import com.nudennie.marsrealestate.network.*
 import kotlinx.coroutines.*
 
 
@@ -40,15 +39,15 @@ class OverviewViewModel : ViewModel() {
      * Call getMarsRealEstateProperties() on init so we can display status immediately.
      */
     init {
-        getMarsRealEstateProperties()
+        getMarsRealEstateProperties(MarsApiFilter.SHOW_ALL)
     }
 
     /**
      * Sets the value of the status LiveData to the Mars API status.
      */
-    private fun getMarsRealEstateProperties() {
+    private fun getMarsRealEstateProperties(filter: MarsApiFilter) {
         coroutineScope.launch {
-            val getPropertiesDeferred = MarsApi.retrofitService.getProperties()
+            val getPropertiesDeferred = MarsApi.retrofitService.getProperties(filter.value)
             try {
                 _status.value = MarsApiStatus.LOADING
                 val listResults = getPropertiesDeferred.await()
@@ -74,5 +73,9 @@ class OverviewViewModel : ViewModel() {
 
     fun displayPropertiesDetailsComplete() {
         _navigateToSelectedProperty.value = null
+    }
+
+    fun updateFilter(filter: MarsApiFilter) {
+        getMarsRealEstateProperties(filter)
     }
 }
