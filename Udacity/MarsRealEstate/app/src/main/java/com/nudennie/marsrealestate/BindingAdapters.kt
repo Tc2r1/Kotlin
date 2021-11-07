@@ -18,9 +18,11 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
 
         Glide.with(imgView.context)
             .load(imgUri)
-            .apply(RequestOptions()
-                .placeholder(R.drawable.loading_animation)
-                .error(R.drawable.ic_broken_image))
+            .apply(
+                RequestOptions()
+                    .placeholder(R.drawable.loading_animation)
+                    .error(R.drawable.ic_broken_image)
+            )
             .into(imgView)
     }
 }
@@ -32,11 +34,11 @@ fun bindStatus(statusImageView: ImageView, status: MarsApiStatus?) {
             statusImageView.visibility = View.VISIBLE
             statusImageView.setImageResource(R.drawable.loading_animation)
         }
-        MarsApiStatus.ERROR-> {
+        MarsApiStatus.ERROR -> {
             statusImageView.visibility = View.VISIBLE
             statusImageView.setImageResource(R.drawable.ic_connection_error)
         }
-        MarsApiStatus.DONE-> {
+        MarsApiStatus.DONE -> {
             statusImageView.visibility = View.GONE
         }
     }

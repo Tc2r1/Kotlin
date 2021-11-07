@@ -3,6 +3,7 @@ package com.nudennie.marsrealestate.detail
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.nudennie.marsrealestate.databinding.FragmentDetailBinding
 
 /**
@@ -18,6 +19,10 @@ class DetailFragment : Fragment() {
         val application = requireNotNull(activity).application
         val binding = FragmentDetailBinding.inflate(inflater)
         binding.lifecycleOwner = this
+        val marsProperty = DetailFragmentArgs.fromBundle(arguments!!).selectedProperty
+        val factory = DetailViewModelFactory(marsProperty, application)
+        val detailsViewModel = ViewModelProvider(this, factory).get(DetailViewModel::class.java)
+        binding.viewModel = detailsViewModel
         return binding.root
     }
 }

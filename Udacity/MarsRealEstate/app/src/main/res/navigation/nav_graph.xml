@@ -38,6 +38,10 @@
         android:name="com.nudennie.marsrealestate.detail.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail">
+        <argument
+            android:name="selectedProperty"
+            app:argType="com.nudennie.marsrealestate.network.MarsProperty"/>
+
     </fragment>
 
 </navigation>

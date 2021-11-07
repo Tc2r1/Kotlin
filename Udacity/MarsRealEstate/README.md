@@ -55,3 +55,5 @@ When using CoroutineScope/ Jobs in ViewModel, don't forget to cancel them in the
 
 Built a bindingAdapter that takes the url from an xml attribute associated with an imageview and use glide to load the image
 
+Parcelling is a way of sharing objects between different processes by flattening objects into a stream of data called a Parcel.  
+

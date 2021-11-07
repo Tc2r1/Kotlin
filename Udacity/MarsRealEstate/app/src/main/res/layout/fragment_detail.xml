@@ -21,6 +21,11 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.nudennie.marsrealestate.detail.DetailViewModel"/>
+    </data>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -39,6 +44,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:imageUrl="@{viewModel.selectedProperty.imgSrcUrl}"
                 tools:src="@tools:sample/backgrounds/scenic"/>
 
             <TextView
@@ -50,6 +56,7 @@
                 android:textSize="39sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/main_photo_image"
+                android:text="@{viewModel.displayPropertyType}"
                 tools:text="To Rent"/>
 
             <TextView
@@ -61,6 +68,7 @@
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/property_type_text"
+                android:text="@{String.valueOf(viewModel.displayPropertyPrice)}"
                 tools:text="$100,000"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

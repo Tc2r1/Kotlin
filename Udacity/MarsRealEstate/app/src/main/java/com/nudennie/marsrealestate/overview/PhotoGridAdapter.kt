@@ -7,7 +7,7 @@ import com.nudennie.marsrealestate.databinding.GridViewItemBinding
 import com.nudennie.marsrealestate.network.MarsProperty
 import com.nudennie.marsrealestate.overview.PhotoGridAdapter.MarsPropertyViewHolder
 
-class PhotoGridAdapter : ListAdapter<MarsProperty, MarsPropertyViewHolder>(DiffCallback) {
+class PhotoGridAdapter(private val onClickListener: OnClickListener) : ListAdapter<MarsProperty, MarsPropertyViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MarsPropertyViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -16,7 +16,14 @@ class PhotoGridAdapter : ListAdapter<MarsProperty, MarsPropertyViewHolder>(DiffC
 
     override fun onBindViewHolder(holder: MarsPropertyViewHolder, position: Int) {
         val marsProperty = getItem(position)
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(marsProperty)
+        }
         holder.bind(marsProperty)
+    }
+
+    class OnClickListener(val clickListener: (marsProperty: MarsProperty) -> Unit) {
+        fun onClick(marsProperty: MarsProperty) = clickListener(marsProperty)
     }
 
     class MarsPropertyViewHolder(private var binding: GridViewItemBinding) : RecyclerView.ViewHolder(binding.root) {
