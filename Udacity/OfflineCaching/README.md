@@ -21,7 +21,9 @@ periodic work. In this app it's used to setup a daily background data sync.
 Dao Offline caches need to methods. 
 One to Load values from the cache. and One to store values. 
 
-Varargs are variable arguements and allow a function to take an array of arguments.
+Varargs are variable arguments and allow a function to take an array of arguments.
+asterisk * is the spread operator. It allows you to pass in an array to a function that expects varargs.
 
 We can use OnConflictSStrategy to replace old cache values with new ones. 
 
+The repository helps clean up the code, makes classes with well defined APIs to help accomplish task easier. 
