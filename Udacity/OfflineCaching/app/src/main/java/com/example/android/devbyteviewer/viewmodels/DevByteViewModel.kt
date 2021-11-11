@@ -42,18 +42,15 @@ import java.io.IOException
  */
 class DevByteViewModel(application: Application) : AndroidViewModel(application) {
 
-
     private val database = getDatabase(application)
     private val videosRepository = VideosRepository(database)
-
-    private val _playList = MutableLiveData<List<Videos>>
-    var playList
+    var playlist = videosRepository.videos
 
     init {
         viewModelScope.launch {
             videosRepository.refreshVideos()
         }
-        playlist = videosRepository.videos
+
     }
 
     class Factory(val app: Application) : ViewModelProvider.Factory {
