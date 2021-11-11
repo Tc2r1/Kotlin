@@ -19,13 +19,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.DevByteFragment">
+    tools:context="com.nudennie.android.devbyteviewer.ui.DevByteFragment">
 
     <data>
 
         <variable
             name="viewModel"
-            type="com.example.android.devbyteviewer.viewmodels.DevByteViewModel" />
+            type="com.nudennie.android.devbyteviewer.viewmodels.DevByteViewModel" />
     </data>
 
     <FrameLayout

@@ -15,12 +15,12 @@
  *
  */
 
-package com.example.android.devbyteviewer
+package com.nudennie.android.devbyteviewer
 
 import android.app.Application
 import android.os.Build
 import androidx.work.*
-import com.example.android.devbyteviewer.work.RefreshDataWorker
+import com.nudennie.android.devbyteviewer.work.RefreshDataWorker
 import kotlinx.coroutines.*
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
@@ -45,7 +45,7 @@ class DevByteApplication : Application() {
 		delayedInit()
 	}
 
-	fun delayedInit() {
+	private fun delayedInit() {
 		applicationScope.launch {
 			setupRecurringWork()
 		}
@@ -68,6 +68,7 @@ class DevByteApplication : Application() {
 		WorkManager.getInstance().enqueueUniquePeriodicWork(
 			RefreshDataWorker.WORK_NAME,
 			ExistingPeriodicWorkPolicy.KEEP,
-			repeatingRequest)
+			repeatingRequest
+		)
 	}
 }

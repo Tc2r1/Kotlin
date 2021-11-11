@@ -15,7 +15,7 @@
  *
  */
 
-package com.example.android.devbyteviewer.work
+package com.nudennie.android.devbyteviewer.work
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -23,8 +23,8 @@ import androidx.work.CoroutineWorker
 import androidx.work.ListenableWorker.Result.Retry
 import androidx.work.ListenableWorker.Result.Success
 import androidx.work.WorkerParameters
-import com.example.android.devbyteviewer.database.getDatabase
-import com.example.android.devbyteviewer.repository.VideosRepository
+import com.nudennie.android.devbyteviewer.database.getDatabase
+import com.nudennie.android.devbyteviewer.repository.VideosRepository
 import retrofit2.HttpException
 
 class RefreshDataWorker(appContext: Context, params: WorkerParameters) : CoroutineWorker(appContext, params) {

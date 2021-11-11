@@ -15,9 +15,9 @@
  *
  */
 
-package com.example.android.devbyteviewer.domain
+package com.nudennie.android.devbyteviewer.domain
 
-import com.example.android.devbyteviewer.util.smartTruncate
+import com.nudennie.android.devbyteviewer.util.smartTruncate
 
 /**
  * Domain objects are plain Kotlin data classes that represent the things in our app. These are the
@@ -30,15 +30,17 @@ import com.example.android.devbyteviewer.util.smartTruncate
 /**
  * Videos represent a devbyte that can be played.
  */
-data class Video(val title: String,
-                 val description: String,
-                 val url: String,
-                 val updated: String,
-                 val thumbnail: String) {
+data class Video(
+	val title: String,
+	val description: String,
+	val url: String,
+	val updated: String,
+	val thumbnail: String
+) {
 
-    /**
-     * Short description is used for displaying truncated descriptions in the UI
-     */
-    val shortDescription: String
-        get() = description.smartTruncate(200)
+	/**
+	 * Short description is used for displaying truncated descriptions in the UI
+	 */
+	val shortDescription: String
+		get() = description.smartTruncate(200)
 }
