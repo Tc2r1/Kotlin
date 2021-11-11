@@ -68,6 +68,7 @@ fun NetworkVideoContainer.asDomainModel(): List<Video> {
 }
 
 fun NetworkVideoContainer.asDatabaseModel(): Array<DatabaseVideo> {
+	testmethod()
     return videos.map {
         DatabaseVideo(
             title = it.title,
