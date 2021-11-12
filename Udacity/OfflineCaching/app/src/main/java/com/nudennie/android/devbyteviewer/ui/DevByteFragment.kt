@@ -29,9 +29,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.android.devbyteviewer.R
-import com.example.android.devbyteviewer.databinding.DevbyteItemBinding
-import com.example.android.devbyteviewer.databinding.FragmentDevByteBinding
+import com.nudennie.android.devbyteviewer.R
+import com.nudennie.android.devbyteviewer.databinding.DevbyteItemBinding
+import com.nudennie.android.devbyteviewer.databinding.FragmentDevByteBinding
 import com.nudennie.android.devbyteviewer.domain.Video
 import com.nudennie.android.devbyteviewer.viewmodels.DevByteViewModel
 

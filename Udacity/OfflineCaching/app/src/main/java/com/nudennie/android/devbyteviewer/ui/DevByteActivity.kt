@@ -19,7 +19,7 @@ package com.nudennie.android.devbyteviewer.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.android.devbyteviewer.R
+import com.nudennie.android.devbyteviewer.R
 
 /**
  * This is a single activity application that uses the Navigation library. Content is displayed
