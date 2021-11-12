@@ -15,7 +15,8 @@ class BlurWorker(context: Context, workerParams: WorkerParameters) : Worker(cont
 	@Throws(IllegalArgumentException::class) override fun doWork(): Result {
 		val appContext = applicationContext
 		val resourceUri = inputData.getString(KEY_IMAGE_URI)
-		makeStatusNotification("Hello", appContext)
+		makeStatusNotification("Blurring image", appContext)
+		sleep()
 
 		try {
 			if (TextUtils.isEmpty(resourceUri)) {

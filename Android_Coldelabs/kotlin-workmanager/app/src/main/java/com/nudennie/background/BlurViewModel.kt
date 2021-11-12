@@ -23,7 +23,7 @@ import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.work.*
-import com.nudennie.background.workers.BlurWorker
+import com.nudennie.background.workers.*
 
 class BlurViewModel(application: Application) : ViewModel() {
 
@@ -41,10 +41,35 @@ class BlurViewModel(application: Application) : ViewModel() {
 	 * @param blurLevel The amount to blur the image
 	 */
 	internal fun applyBlur(blurLevel: Int) {
-		val blurRequest = OneTimeWorkRequestBuilder<BlurWorker>()
-			.setInputData(createInputDataForUri())
+		// Add WorkRequest to Cleanup temporary Images
+		var continuation = workManager.beginWith(
+			OneTimeWorkRequest.from(CleanupWorker::class.java)
+		)
+
+		// Add WorkRequests to blur the image the number of times requested
+		for (index in 0 until blurLevel) {
+			val blurBuilder = OneTimeWorkRequestBuilder<BlurWorker>()
+
+			// Input the Uri if this is the first blur operation
+			// After the first blur operation the input will be the output of previous
+			// blur operations.
+
+			if (index == 0) {
+				blurBuilder.setInputData(createInputDataForUri())
+			}
+
+			continuation = continuation.then(blurBuilder.build())
+		}
+
+		// Add WorkRequest to Save the image to the file system.
+
+		val saveRequest = OneTimeWorkRequest.Builder(SaveImageToFileWorker::class.java)
 			.build()
-		workManager.enqueue(blurRequest)
+
+		continuation = continuation.then(saveRequest)
+
+		// Actually starts the work
+		continuation.enqueue()
 	}
 
 	private fun uriOrNull(uriString: String?): Uri? {
@@ -93,6 +118,5 @@ class BlurViewModel(application: Application) : ViewModel() {
 			builder.putString(KEY_IMAGE_URI, imageUri.toString())
 		}
 		return builder.build()
-
 	}
 }

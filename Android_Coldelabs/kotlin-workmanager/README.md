@@ -48,3 +48,4 @@ There are two types of WorkRequests:
     OneTimeWorkRequest: A WorkRequest that will only execute once.
     PeriodicWorkRequest: A WorkRequest that will repeat on a cycle.
 
+A feature of chaining is that the output of one WorkRequest becomes the input of the next WorkRequest in the chain.
