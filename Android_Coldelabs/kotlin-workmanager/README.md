@@ -30,3 +30,21 @@ or doing the
 
 ## Tc2r1's Notes:
 ------------
+
+WorkManager is an incredibly flexible library that has many additional benefits. These include:
+
+    Support for both asynchronous one-off and periodic tasks
+    Support for constraints such as network conditions, storage space, and charging status
+    Chaining of complex work requests, including running work in parallel
+    Output from one work request used as input for the next
+    Handling API level compatibility back to API level 14 (see note)
+    Working with or without Google Play services
+    Following system health best practices
+    LiveData support to easily display work request state in UI
+
+
+There are two types of WorkRequests:
+
+    OneTimeWorkRequest: A WorkRequest that will only execute once.
+    PeriodicWorkRequest: A WorkRequest that will repeat on a cycle.
+

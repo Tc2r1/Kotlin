@@ -14,20 +14,21 @@
  * limitations under the License.
  */
 
-package com.example.background
+package com.nudennie.background
 
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.example.background.databinding.ActivityBlurBinding
+import com.nudennie.background.R
+import com.nudennie.background.databinding.ActivityBlurBinding
 
 class BlurActivity : AppCompatActivity() {
 
     private val viewModel: BlurViewModel by viewModels {
-        BlurViewModel.BlurViewModelFactory(
-            application
-        )
+		BlurViewModel.BlurViewModelFactory(
+			application
+		)
     }
     private lateinit var binding: ActivityBlurBinding
 

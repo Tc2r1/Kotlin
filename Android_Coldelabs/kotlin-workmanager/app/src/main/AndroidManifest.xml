@@ -15,7 +15,7 @@
   ~ limitations under the License.
   -->
 
-<manifest package="com.example.background"
+<manifest package="com.nudennie.background"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -30,7 +30,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".BlurActivity">
+        <activity android:name="com.nudennie.background.BlurActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
