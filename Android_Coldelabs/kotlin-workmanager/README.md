@@ -49,3 +49,20 @@ There are two types of WorkRequests:
     PeriodicWorkRequest: A WorkRequest that will repeat on a cycle.
 
 A feature of chaining is that the output of one WorkRequest becomes the input of the next WorkRequest in the chain.
+
+You can get the status of any WorkRequest by getting a LiveData that holds a WorkInfo object. WorkInfo is an object that contains details about the current state of a WorkRequest, including:
+
+    Whether the work is BLOCKED, CANCELLED, ENQUEUED, FAILED, RUNNING or SUCCEEDED.
+    If the WorkRequest is finished, any output data from the work.
+
+By Completing the Blur-O-Matic app I practiced clean code by:
+
+    Adding WorkManager to my Project
+    Scheduling a OneTimeWorkRequest
+    Input and Output parameters
+    Chaining work together WorkRequests
+    Naming Unique WorkRequest chains
+    Tagging WorkRequests
+    Displaying WorkInfo in the UI
+    Cancelling WorkRequests
+    Adding constraints to a WorkRequest

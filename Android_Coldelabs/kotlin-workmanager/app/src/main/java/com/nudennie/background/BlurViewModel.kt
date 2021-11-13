@@ -20,103 +20,121 @@ import android.app.Application
 import android.content.ContentResolver
 import android.content.Context
 import android.net.Uri
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.work.*
-import com.nudennie.background.workers.*
+import com.nudennie.background.workers.BlurWorker
+import com.nudennie.background.workers.CleanupWorker
+import com.nudennie.background.workers.SaveImageToFileWorker
+
 
 class BlurViewModel(application: Application) : ViewModel() {
 
-	internal var imageUri: Uri? = null
-	internal var outputUri: Uri? = null
+    internal var imageUri: Uri? = null
+    internal var outputUri: Uri? = null
+    private val workManager = WorkManager.getInstance(application)
+    internal val outputWorkInfos: LiveData<List<WorkInfo>>
 
-	private val workManager = WorkManager.getInstance(application)
+    init {
+        // This transformation makes sure that whenever the current work Id changes the WorkInfo
+        // the UI is listening to changes
+        outputWorkInfos = workManager.getWorkInfosByTagLiveData(TAG_OUTPUT)
+        imageUri = getImageUri(application.applicationContext)
+    }
 
-	init {
-		imageUri = getImageUri(application.applicationContext)
-	}
+    internal fun cancelWork() {
+        workManager.cancelUniqueWork(IMAGE_MANIPULATION_WORK_NAME)
+    }
 
-	/**
-	 * Create the WorkRequest to apply the blur and save the resulting image
-	 * @param blurLevel The amount to blur the image
-	 */
-	internal fun applyBlur(blurLevel: Int) {
-		// Add WorkRequest to Cleanup temporary Images
-		var continuation = workManager.beginWith(
-			OneTimeWorkRequest.from(CleanupWorker::class.java)
-		)
+    /**
+     * Creates the input data bundle which includes the Uri to operate on
+     * @return Data which contains the Image Uri as a String
+     */
+    private fun createInputDataForUri(): Data {
+        val builder = Data.Builder()
+        imageUri?.let {
+            builder.putString(KEY_IMAGE_URI, imageUri.toString())
+        }
+        return builder.build()
+    }
 
-		// Add WorkRequests to blur the image the number of times requested
-		for (index in 0 until blurLevel) {
-			val blurBuilder = OneTimeWorkRequestBuilder<BlurWorker>()
+    /**
+     * Create the WorkRequest to apply the blur and save the resulting image
+     * @param blurLevel The amount to blur the image
+     */
+    internal fun applyBlur(blurLevel: Int) {
+        // Add WorkRequest to Cleanup temporary images
+        var continuation = workManager
+            .beginUniqueWork(
+                IMAGE_MANIPULATION_WORK_NAME,
+                ExistingWorkPolicy.REPLACE,
+                OneTimeWorkRequest.from(CleanupWorker::class.java)
+            )
 
-			// Input the Uri if this is the first blur operation
-			// After the first blur operation the input will be the output of previous
-			// blur operations.
+        // Add WorkRequests to blur the image the number of times requested
+        for (i in 0 until blurLevel) {
+            val blurBuilder = OneTimeWorkRequestBuilder<BlurWorker>()
 
-			if (index == 0) {
-				blurBuilder.setInputData(createInputDataForUri())
-			}
+            // Input the Uri if this is the first blur operation
+            // After the first blur operation the input will be the output of previous
+            // blur operations.
+            if (i == 0) {
+                blurBuilder.setInputData(createInputDataForUri())
+            }
 
-			continuation = continuation.then(blurBuilder.build())
-		}
+            continuation = continuation.then(blurBuilder.build())
+        }
 
-		// Add WorkRequest to Save the image to the file system.
+        // Create charging constraint
+        val constraints = Constraints.Builder()
+            .setRequiresCharging(true)
+            .build()
 
-		val saveRequest = OneTimeWorkRequest.Builder(SaveImageToFileWorker::class.java)
-			.build()
+        // Add WorkRequest to save the image to the filesystem
+        val save = OneTimeWorkRequestBuilder<SaveImageToFileWorker>()
+            .setConstraints(constraints)
+            .addTag(TAG_OUTPUT)
+            .build()
+        continuation = continuation.then(save)
 
-		continuation = continuation.then(saveRequest)
+        // Actually start the work
+        continuation.enqueue()
+    }
 
-		// Actually starts the work
-		continuation.enqueue()
-	}
+    private fun uriOrNull(uriString: String?): Uri? {
+        return if (!uriString.isNullOrEmpty()) {
+            Uri.parse(uriString)
+        } else {
+            null
+        }
+    }
 
-	private fun uriOrNull(uriString: String?): Uri? {
-		return if (!uriString.isNullOrEmpty()) {
-			Uri.parse(uriString)
-		} else {
-			null
-		}
-	}
+    private fun getImageUri(context: Context): Uri {
+        val resources = context.resources
 
-	private fun getImageUri(context: Context): Uri {
-		val resources = context.resources
+        val imageUri = Uri.Builder()
+            .scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
+            .authority(resources.getResourcePackageName(R.drawable.android_cupcake))
+            .appendPath(resources.getResourceTypeName(R.drawable.android_cupcake))
+            .appendPath(resources.getResourceEntryName(R.drawable.android_cupcake))
+            .build()
 
-		val imageUri = Uri.Builder()
-			.scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
-			.authority(resources.getResourcePackageName(R.drawable.android_cupcake))
-			.appendPath(resources.getResourceTypeName(R.drawable.android_cupcake))
-			.appendPath(resources.getResourceEntryName(R.drawable.android_cupcake))
-			.build()
+        return imageUri
+    }
 
-		return imageUri
-	}
+    internal fun setOutputUri(outputImageUri: String?) {
+        outputUri = uriOrNull(outputImageUri)
+    }
+}
 
-	internal fun setOutputUri(outputImageUri: String?) {
-		outputUri = uriOrNull(outputImageUri)
-	}
+class BlurViewModelFactory(private val application: Application) : ViewModelProvider.Factory {
 
-	class BlurViewModelFactory(private val application: Application) : ViewModelProvider.Factory {
-
-		override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-			return if (modelClass.isAssignableFrom(BlurViewModel::class.java)) {
-				BlurViewModel(application) as T
-			} else {
-				throw IllegalArgumentException("Unknown ViewModel class")
-			}
-		}
-	}
-
-	/**
-	 * Creates the input data bundle which includes the Uri to operate on
-	 * @return Data which contains the Image Uri as a String
-	 */
-	private fun createInputDataForUri(): Data {
-		val builder = Data.Builder()
-		imageUri?.let {
-			builder.putString(KEY_IMAGE_URI, imageUri.toString())
-		}
-		return builder.build()
-	}
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        return if (modelClass.isAssignableFrom(BlurViewModel::class.java)) {
+            BlurViewModel(application) as T
+        } else {
+            throw IllegalArgumentException("Unknown ViewModel class")
+        }
+    }
 }
