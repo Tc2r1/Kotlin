@@ -28,7 +28,6 @@ import com.nudennie.background.workers.BlurWorker
 import com.nudennie.background.workers.CleanupWorker
 import com.nudennie.background.workers.SaveImageToFileWorker
 
-
 class BlurViewModel(application: Application) : ViewModel() {
 
     internal var imageUri: Uri? = null
