@@ -5,7 +5,6 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.nudennie.gdgfinder.network.GdgChapter
 import com.nudennie.gdgfinder.search.GdgListAdapter
-import java.util.List
 
 /**
  * When there is no Mars property data (data is null), hide the [RecyclerView], otherwise show it.

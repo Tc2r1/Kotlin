@@ -48,11 +48,10 @@
 
         <TextView
             android:id="@+id/subtitle"
+            style="@style/TextAppearance.Subtitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="13dp"
-            android:textSize="18sp"
-            android:textColor="#555555"
             app:layout_constraintStart_toEndOf="@id/start_grid"
             app:layout_constraintEnd_toStartOf="@id/end_grid"
             app:layout_constraintTop_toBottomOf="@+id/intro_text"
@@ -73,14 +72,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:textAllCaps="true"
-            android:textStyle="bold"
-            android:background="#ff9999"
+            style="@style/TextAppearance.Title"
             app:layout_constraintTop_toBottomOf="@id/image"
             app:layout_constraintEnd_toStartOf="@+id/end_grid"
             app:layout_constraintStart_toStartOf="@+id/start_grid"
-            android:textSize="24sp"
-            android:textColor="#555555"
             android:text="@string/about_google_developer_groups" />
 
         <androidx.constraintlayout.widget.Guideline
