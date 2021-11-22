@@ -1,8 +1,8 @@
 package com.nudennie.gdgfinder.home
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 
 class HomeViewModel : ViewModel() {
     private val _navigateToSearch = MutableLiveData<Boolean>()

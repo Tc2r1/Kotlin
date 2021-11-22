@@ -8,7 +8,7 @@ GDGs, or Google Developer Groups, are communities of developers that focus on Go
 
 GDG Finder helps you locate GDGs around the world or start one of your own. You'll learn the principles of Material Design so you can implement professional looking designs and build Android apps that users love to use!
 
- 
+
 ## Screenshots
 
 ![Screenshot1](screenshots/gdg-finder-home.png)
@@ -16,5 +16,4 @@ GDG Finder helps you locate GDGs around the world or start one of your own. You'
 ![Screenshot3](screenshots/gdg-finder-apply.png)
 
 ## Tc2r1's Notes
-
 
