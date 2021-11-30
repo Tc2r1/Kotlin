@@ -39,7 +39,7 @@
                     android:id="@+id/end_image"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="@dimen/spacing_normal"
                     app:layout_constraintTop_toBottomOf="@id/description"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -83,7 +83,7 @@
                     android:id="@+id/title"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="@dimen/spacing_normal"
                     android:textAppearance="?attr/textAppearanceHeadline5"
                     app:layout_constraintTop_toBottomOf="@id/image"
                     app:layout_constraintEnd_toStartOf="@+id/end_grid"
@@ -95,14 +95,14 @@
                     android:id="@+id/start_grid"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintGuide_begin="16dp"
+                    app:layout_constraintGuide_begin="@dimen/spacing_normal"
                     android:orientation="vertical" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/end_grid"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintGuide_end="16dp"
+                    app:layout_constraintGuide_end="@dimen/spacing_normal"
                     android:orientation="vertical" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
@@ -110,7 +110,7 @@
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_margin="@dimen/spacing_normal"
             app:srcCompat="@drawable/ic_gdg"
             android:layout_gravity="bottom|end"
             android:onClick="@{() -> viewModel.onFabClicked()}" />
