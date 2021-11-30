@@ -17,3 +17,15 @@ GDG Finder helps you locate GDGs around the world or start one of your own. You'
 
 ## Tc2r1's Notes
 
+textAppearance is an attribute on any view that defines text. It only lets you define things 
+about how to display text.
+
+All text styles in Material Design Components can be used as textAppearance, that way any theme 
+attribute defined will not be over written by material style. 
+
+To use Material Attributes use "?attr/"
+
+Material Attributes help create consist designs that are easy to update. 
+
+Theme Overlays are lightweight themes for changing one section of the screen to have a different 
+theme.
