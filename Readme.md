@@ -1,7 +1,8 @@
 # Android Kotlin Completed Training Applications. 
 
-<image src="_resources/android_head.png" width="200px" />
-<center> <p> This Repo is used to track a series of Android Kotlin apps I've created based on Google & Udacity trainings. In addition to extra resources to cover latest MAD features and Android associate developer certificate requirements.</p></center>
+<p align="center"> <image src="_resources/android_head.png" width="200px" /></p>
+ 
+<div align="center">This Repo is used to track a series of Android Kotlin apps I've created based on Google & Udacity trainings. In addition to extra resources to cover latest MAD features and Android associate developer certificate requirements.</div> <br>
  
  This repository includes Kotlin sample applications I've created based on latest Android guidelines available in the following references:<br>
 - [Developing Android apps with Kotlin series.](https://www.udacity.com/course/developing-android-apps-with-kotlin--ud9012) <br>
@@ -17,17 +18,17 @@ This is an overview of the applications and the development capabilities and fea
 ### Udacity: 
 All applications under /Udacity folder:
 
-- **DiceRoller**: the basic of Android layouts and actions.<br><br>
-- **Aboutme**: how to use Android data binding features.<br><br>
-- **ColorMyviews**: build responsive views with constraint layout.<br><br>
-- **TriviaApp**: usage of navigation graphs, navigation drawer and fragments.<br><br>
-- **DessertPusher**: handling acitivty/ fragment lifecycle and observers.<br><br>
-- **GuessIt**: a word guessing game to learn about application archeticture, viewModel and liveData.<br><br>
-- **SleepQualityTracker**: room database, recyclerview, coroutines and basic unit testing.<br><br>
-- **GridLayout**: room database and grid layout.<br><br>
-- **MarsRealEstate**: viewModel & liveData with retrofit, glide and moshi in Kotlin.!<br><br>
-- **DevByteViewer**: room database and retrofit2 with workManager using MVVM architecture.<br><br>
-- **Theme**: themes, styles, overlays, attributes, tint and more.<br><br>
+- [**DiceRoller**](Udacity/DiceRoller/): the basic of Android layouts and actions.<br><br>
+- [**Aboutme**](Udacity/AboutMe/): how to use Android data binding features.<br><br>
+- [**ColorMyviews**](Udacity/ColorMyViews/): build responsive views with constraint layout.<br><br>
+- [**TriviaApp**](Udacity/TriviaApp/): usage of navigation graphs, navigation drawer and fragments.<br><br>
+- [**DessertPusher**](Udacity/DessertPusher/): handling acitivty/ fragment lifecycle and observers.<br><br>
+- [**GuessIt**](Udacity/GuessIt/): a word guessing game to learn about application archeticture, viewModel and liveData.<br><br>
+- [**SleepQualityTracker**](Udacity/TrackMySleepQuality/): room database, recyclerview, coroutines and basic unit testing.<br><br>
+- [**GridLayout**](Udacity/GridLayout/): room database and grid layout.<br><br>
+- [**MarsRealEstate**](Udacity/MarsRealEstate/): viewModel & liveData with retrofit, glide and moshi in Kotlin.!<br><br>
+- [**OfflineCaching**](Udacity/OfflineCaching/): room database and retrofit2 with workManager using MVVM architecture.<br><br>
+- [**DesignForEveryone**](Udacity/DesignForEveryone/): themes, styles, overlays, attributes, tint, accessbility, RTL and more.<br><br>
 
 [comment]: <> (### Advanced)
 
@@ -70,7 +71,7 @@ AndroidX | DiceRoller | -
 Android KTX | [reference](https://developer.android.com/kotlin/ktx) | -
 Android KTX (Navigation) | AndroidTrivia | MainActivity,<br>navigation_main
 Android KTX (Room) | GridSleepQualityTracker | -
-Android KTX (WorkManager) | DevByteViewer | RefreshDataWork,<br>DevByteApplication (setupPeriodicWorker)
+Android KTX (WorkManager) | OfflineCaching | RefreshDataWork,<br>OfflineCachingApplication (setupPeriodicWorker)
 
 [comment]: <> (Toast  | EggTimer | EggTimerFragment)
 [comment]: <> (Create a Notification | EggTimer | NotificationUtils,<br>EggTimerFragment &#40;createChannel&#41;,<br>AlarmReceiver [optional])
@@ -84,7 +85,7 @@ RecyclerView list | SleepQualityTracker,<br>GridSleepQualityTracker | SleepNight
 Navigation drawer | AndroidTrivia | MainActivity,<br>activity_main,<br>navdrawer_menu
 Start activity | GridSleepQualityTracker | SleepTrackerFragment
 Share Intent | AndroidTrivia | GameWonFragment (createShareIntent)
-Themes | Theme | -
+Themes | DesignForEveryone | -
 Lifecycles | DessertPusher | MainActivity
 Menu | AndroidTrivia | winner_menu,<br>GameWonFragment
 
@@ -98,7 +99,7 @@ Topic  | Application | Filename | Function
 ------------- | ------------- | ------------- | -------------
 viewModelScope | TodoTester| TasksViewModel | completeTask,<br>clearCompletedTasks
 Room database and liveview | SleepQualityTracker,<br>GridSleepQualityTracker | SleepTrackerViewModel (allNights)
-Repository | DevByteViewer | VideosRepository,<br>VideoDao,<br>Network
+Repository | OfflineCaching | VideosRepository,<br>VideoDao,<br>Network
 
 [comment]: <> (App settings with shared preferences | AppWithSettings | SettingsFragment, MainActivity &#40;displaySwitchValue&#41;)
 
@@ -149,7 +150,3 @@ Android logs | https://developer.android.com/studio/debug/am-logcat
 
 [comment]: <> (https://developers.google.com/certification/associate-android-developer/study-guide)
 
-
-# Tools
-
-The applications created using Android studio 4.1.1 
