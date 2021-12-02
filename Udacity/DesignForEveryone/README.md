@@ -15,7 +15,31 @@ GDG Finder helps you locate GDGs around the world or start one of your own. You'
 ![Screenshot2](screenshots/gdg-finder-search.png)
 ![Screenshot3](screenshots/gdg-finder-apply.png)
 
+
+## What was practiced in this project: 
+1. How to use the styling system on Android
+    * When and how to use *Themes*
+    * When and how to use *Styles*
+    * When and how to use *Attributes*
+    
+2. How to use *Materiel Design* and the *Material Design Components* library.
+    * Use theming attributes to configure entire app. 
+    
+3. Right to Left
+    * UI Mirroring, Which elements should be mirrored and which should not. 
+    * How to customize the mirror indicator.
+    
+4. Accessibility
+    * Accessibility Scanner - A Google PlayStore app to scan app for issues.
+    * Talkback 
+    * Content Descriptors and Content Grouping. 
+    
+5. Other Styling
+    * Types of Drawables
+    * Dark Mode. 
+
 ## Tc2r1's Notes
+[material.io website](https://material.io/)
 
 textAppearance is an attribute on any view that defines text. It only lets you define things 
 about how to display text.
@@ -59,3 +83,11 @@ Live Regions are a way to tell Talk Back When stuff changes. For example: Inform
 an incorrect password or network error is a great way to make an application more accessible. 
 
 We should not use hardcoded colors because this makes it hard for color blinded individuals. 
+
+### Dark Mode
+
+Android supports Dark Theme, it uses the theme attributes to switch the UI to DarkMode. 
+To enable Dark Theme, we switch from Light Theme to Day N Night. 
+
+
+
