@@ -29,3 +29,13 @@ Material Attributes help create consist designs that are easy to update.
 
 Theme Overlays are lightweight themes for changing one section of the screen to have a different 
 theme.
+
+RTL APIs
+
+* android:layoutDirection - sets the direction of a components layout
+
+* android:textDirection - sets the direction of a components text
+
+* android:textAlignment - sets the direction of a components text
+
+* getLayoutDirectionFromLocal() - programmatically gets the local's specified direction.
