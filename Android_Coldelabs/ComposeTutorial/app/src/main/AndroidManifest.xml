@@ -10,6 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ComposeTutorial">
         <activity
+            android:name=".ui.theme.Conversations"
+            android:exported="false"
+            android:label="@string/title_activity_conversations"
+            android:theme="@style/Theme.ComposeTutorial.NoActionBar" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
